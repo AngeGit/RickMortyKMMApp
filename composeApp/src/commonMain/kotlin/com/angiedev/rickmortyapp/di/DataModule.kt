@@ -1,6 +1,8 @@
 package com.angiedev.rickmortyapp.di
 
+import com.angiedev.rickmortyapp.data.RepositoryImpl
 import com.angiedev.rickmortyapp.data.remote.ApiService
+import com.angiedev.rickmortyapp.domain.Repository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -33,4 +35,5 @@ val dataModule = module {
     }
 
     factoryOf(::ApiService)
+    factory<Repository> { RepositoryImpl(get()) }
 }
