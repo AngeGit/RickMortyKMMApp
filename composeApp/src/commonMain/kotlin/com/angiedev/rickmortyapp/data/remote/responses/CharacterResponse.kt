@@ -7,7 +7,8 @@ import kotlinx.serialization.Serializable
 data class CharacterResponse(
     val id: Int,
     val status: String,
-    val image: String
+    val image: String,
+    val name:String,
 ) {
     companion object {
         const val IS_ALIVE = "alive"
@@ -16,6 +17,7 @@ data class CharacterResponse(
     fun toDomain(): CharacterModel = CharacterModel(
         id = id,
         isAlive = status.lowercase() == IS_ALIVE,
-        image = image
+        image = image,
+        name = name
     )
 }
