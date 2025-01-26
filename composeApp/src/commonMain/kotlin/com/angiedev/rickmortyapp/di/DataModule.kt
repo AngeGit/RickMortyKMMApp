@@ -2,13 +2,13 @@ package com.angiedev.rickmortyapp.di
 
 import com.angiedev.rickmortyapp.data.RepositoryImpl
 import com.angiedev.rickmortyapp.data.remote.ApiService
+import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
 import com.angiedev.rickmortyapp.domain.Repository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
-import io.ktor.http.parameters
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.factoryOf
@@ -35,5 +35,6 @@ val dataModule = module {
     }
 
     factoryOf(::ApiService)
-    factory<Repository> { RepositoryImpl(get()) }
+    factory<Repository> { RepositoryImpl(get(), get()) }
+    factoryOf(::CharactersPagingSource)
 }
