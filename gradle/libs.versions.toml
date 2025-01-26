@@ -64,6 +64,8 @@ kotlin-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", ver
 #ViewModel
 viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel" }
 
+#Images
+coil-compose = { module = "io.coil-kt:coil-", version = "1.4.0" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
