@@ -2,6 +2,7 @@ package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.angiedev.rickmortyapp.domain.GetAllCharactersUseCase
 import com.angiedev.rickmortyapp.domain.GetRandomCharacterUseCase
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CharactersViewModel(
-    val getRandomCharacterUseCase: GetRandomCharacterUseCase,
+    private val getRandomCharacterUseCase: GetRandomCharacterUseCase,
+    private val getAllCharacters: GetAllCharactersUseCase
 ): ViewModel(){
 
     private val _characterOfTheDayState = MutableStateFlow(CharacterState())
@@ -26,7 +28,10 @@ class CharactersViewModel(
             }
             _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
         }
-
+        fetchAllCharacters()
+    }
+    private fun fetchAllCharacters() {
+        _characterOfTheDayState.update { it.copy(characters = getAllCharacters()) }
     }
 
 }
