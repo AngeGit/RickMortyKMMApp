@@ -1,7 +1,10 @@
 package com.angiedev.rickmortyapp.ui.home
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.angiedev.rickmortyapp.ui.home.homebottombar.navigation.HomeBottomBarItem
 import com.angiedev.rickmortyapp.ui.home.homebottombar.navigation.HomeBottomBarNavigationWrapper
@@ -13,8 +16,10 @@ fun HomeScreen() {
 
     Scaffold(
         bottomBar = { BottomBarNavigation(getBottomBarItems(), homeBottomBarNavController) }
-    ) {
-       HomeBottomBarNavigationWrapper(homeBottomBarNavController)
+    ) { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            HomeBottomBarNavigationWrapper(homeBottomBarNavController)
+        }
     }
 }
 
