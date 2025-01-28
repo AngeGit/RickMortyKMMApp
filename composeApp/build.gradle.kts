@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -55,6 +56,9 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.paging.compose.common)
             implementation(libs.paging.common)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
 
         }
         iosMain.dependencies {
