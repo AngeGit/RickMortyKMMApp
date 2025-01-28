@@ -80,7 +80,7 @@ fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = Color.Green.copy(alpha = 0.5f))
             }
         }
 
