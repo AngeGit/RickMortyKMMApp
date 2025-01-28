@@ -32,7 +32,7 @@ fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
 
     Card(
         modifier = Modifier.fillMaxWidth()
-            .height(300.dp).padding(16.dp),
+            .height(400.dp).padding(16.dp),
         shape = RoundedCornerShape(12.dp),
     ) {
         characterOfTheDay?.let {
@@ -61,7 +61,7 @@ fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
                 )
                 Text(
                     characterOfTheDay.name,
-                    fontSize = 40.sp,
+                    fontSize = 30.sp,
                     maxLines = 1,
                     minLines = 1,
                     textAlign = TextAlign.Center,

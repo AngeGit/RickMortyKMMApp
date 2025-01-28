@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.cash.paging.compose.collectAsLazyPagingItems
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -14,11 +15,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun CharactersScreen() {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state = charactersViewModel.characterOfTheDayState.collectAsStateWithLifecycle()
+    val characters = state.value.characters.collectAsLazyPagingItems()
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
         CharacterOfTheDayComponent(state.value.characterOfTheDay)
+        CharactersGridList(characters)
     }
 }
 
