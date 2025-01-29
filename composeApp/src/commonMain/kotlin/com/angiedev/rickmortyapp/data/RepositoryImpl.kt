@@ -8,6 +8,7 @@ import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
 import com.angiedev.rickmortyapp.domain.Repository
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.domain.model.CharacterOfTheDayModel
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
@@ -22,9 +23,6 @@ class RepositoryImpl(
         const val PREFETCH_ITEMS = 4
     }
 
-    override suspend fun getCharacter(id: Int): CharacterModel =
-        api.getCharacterById(id).toDomain()
-
     override fun getAllCharacters(): Flow<PagingData<CharacterModel>> =
         Pager(
             config = PagingConfig(
@@ -35,7 +33,13 @@ class RepositoryImpl(
             charactersPagingSource
         }.flow
 
-    override suspend fun getCharacterOfTheDayDB() {
-        db.userPreferencesDao().getCharacterOfTheDayDB()
+    override suspend fun getCharacter(id: Int): CharacterModel =
+        api.getCharacterById(id).toDomain()
+
+    override suspend fun getCharacterOfTheDayDB(): CharacterOfTheDayModel? =
+        db.userPreferencesDao().getCharacterOfTheDayDB()?.toDomain()
+
+    override suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel) {
+        db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
 }
