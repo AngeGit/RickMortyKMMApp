@@ -1,6 +1,5 @@
 package com.angiedev.rickmortyapp.domain
 
-import androidx.compose.ui.input.key.Key.Companion.Calendar
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -12,6 +11,7 @@ class GetRandomCharacterUseCase(
     private val repository: Repository
 ) {
     suspend operator fun invoke(): CharacterModel {
+        repository.getCharacterOfTheDayDB()
 
         val randomId: Int = (1..826).random()
         return repository.getCharacter(randomId)
