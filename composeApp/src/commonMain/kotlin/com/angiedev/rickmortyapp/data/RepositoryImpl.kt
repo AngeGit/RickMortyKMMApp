@@ -3,6 +3,7 @@ package com.angiedev.rickmortyapp.data
 import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
+import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
 import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
 import com.angiedev.rickmortyapp.domain.Repository
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
     private val api: ApiService,
-    private val charactersPagingSource: CharactersPagingSource
+    private val charactersPagingSource: CharactersPagingSource,
+    private val db: RickMortyDatabase,
 ) : Repository {
 
     companion object {
@@ -32,4 +34,8 @@ class RepositoryImpl(
         ) {
             charactersPagingSource
         }.flow
+
+    override suspend fun getCharacterOfTheDayDB() {
+        db.userPreferencesDao().getCharacterOfTheDayDB()
+    }
 }
