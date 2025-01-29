@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface Repository {
     suspend fun getCharacter(id: Int): CharacterModel
     fun getAllCharacters(): Flow<PagingData<CharacterModel>>
+    suspend fun getCharacterOfTheDayDB()
 }
