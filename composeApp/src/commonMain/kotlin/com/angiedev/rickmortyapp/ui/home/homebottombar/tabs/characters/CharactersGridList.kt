@@ -5,7 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,7 +25,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import coil3.compose.AsyncImage
@@ -33,13 +35,13 @@ import com.angiedev.rickmortyapp.domain.model.CharacterModel
 
 @Composable
 fun CharactersGridList(characters: LazyPagingItems<CharacterModel>, state: State<CharacterState>) {
+
     LazyVerticalGrid(
         modifier= Modifier.fillMaxSize().padding(16.dp),
         columns=GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ){
-
         when {
             characters.loadState.refresh is LoadState.Loading && characters.itemCount==0 -> {
                 //Initial loading
@@ -65,7 +67,18 @@ fun CharactersGridList(characters: LazyPagingItems<CharacterModel>, state: State
             }
             else -> {
                 item (span = { GridItemSpan(2) }){
-                    CharacterOfTheDayComponent(state.value.characterOfTheDay)
+                    Column {
+                        Text(
+                            text = "Characters",
+                            color = Color.Green.copy(alpha = 0.8f),
+                            fontSize = 24.sp,
+                            modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                            textAlign = TextAlign.Center
+                        )
+
+                        CharacterOfTheDayComponent(state.value.characterOfTheDay)
+                    }
+
                 }
 
                 items(characters.itemCount) { index ->

@@ -18,7 +18,6 @@ fun CharactersScreen() {
     val characters = state.value.characters.collectAsLazyPagingItems()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        //CharacterOfTheDayComponent(state.value.characterOfTheDay)
         CharactersGridList(characters,state)
     }
 }
