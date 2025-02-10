@@ -3,7 +3,7 @@ package com.angiedev.rickmortyapp.data.remote.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.angiedev.rickmortyapp.data.remote.ApiService
-import com.angiedev.rickmortyapp.data.remote.responses.CharactersWrapperResponse
+import com.angiedev.rickmortyapp.data.remote.responses.characters.CharactersWrapperResponse
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 
 class CharactersPagingSource(

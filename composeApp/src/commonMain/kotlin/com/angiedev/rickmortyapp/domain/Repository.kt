@@ -3,6 +3,7 @@ package com.angiedev.rickmortyapp.domain
 import app.cash.paging.PagingData
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.domain.model.CharacterOfTheDayModel
+import com.angiedev.rickmortyapp.domain.model.EpisodeModel
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
@@ -10,4 +11,6 @@ interface Repository {
     suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel)
     suspend fun getCharacter(id: Int): CharacterModel
     fun getAllCharacters(): Flow<PagingData<CharacterModel>>
+    suspend fun getAllEpisodes(): Flow<PagingData<EpisodeModel>>
+
 }
