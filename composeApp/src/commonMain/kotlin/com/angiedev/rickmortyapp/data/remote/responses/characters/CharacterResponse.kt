@@ -1,4 +1,4 @@
-package com.angiedev.rickmortyapp.data.remote.responses
+package com.angiedev.rickmortyapp.data.remote.responses.characters
 
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import kotlinx.serialization.Serializable

@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.cash.paging.compose.collectAsLazyPagingItems
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -15,6 +17,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun EpisodesScreen() {
     val episodesViewModel = koinViewModel<EpisodesViewModel>()
+    val episodesState = episodesViewModel.state.collectAsStateWithLifecycle()
+    val episodes = episodesState.value.episodes.collectAsLazyPagingItems()
 
     Box(modifier = Modifier.fillMaxSize().background(Color.Blue)) {
         Text(text = "Episodes Screen")
