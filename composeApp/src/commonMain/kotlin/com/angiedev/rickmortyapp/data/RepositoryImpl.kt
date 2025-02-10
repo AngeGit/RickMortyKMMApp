@@ -6,14 +6,17 @@ import app.cash.paging.PagingData
 import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
 import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
+import com.angiedev.rickmortyapp.data.remote.paging.EpisodesPagingSource
 import com.angiedev.rickmortyapp.domain.Repository
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.domain.model.CharacterOfTheDayModel
+import com.angiedev.rickmortyapp.domain.model.EpisodeModel
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
     private val api: ApiService,
     private val charactersPagingSource: CharactersPagingSource,
+    private val episodesPagingSources: EpisodesPagingSource,
     private val db: RickMortyDatabase,
 ) : Repository {
 
@@ -23,6 +26,7 @@ class RepositoryImpl(
         const val PREFETCH_ITEMS = 4
     }
 
+    //region Characters
     override fun getAllCharacters(): Flow<PagingData<CharacterModel>> =
         Pager(
             config = PagingConfig(
@@ -42,4 +46,14 @@ class RepositoryImpl(
     override suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel) {
         db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
+    //endregion Characters
+    override suspend fun getAllEpisodes(): Flow<PagingData<EpisodeModel>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = MAX_CHARACTERS,
+                prefetchDistance = PREFETCH_ITEMS,
+            )
+        ) { episodesPagingSources }.flow
+
+
 }
