@@ -11,6 +11,5 @@ interface Repository {
     suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel)
     suspend fun getCharacter(id: Int): CharacterModel
     fun getAllCharacters(): Flow<PagingData<CharacterModel>>
-    suspend fun getAllEpisodes(): Flow<PagingData<EpisodeModel>>
-
+    fun getAllEpisodes(): Flow<PagingData<EpisodeModel>>
 }

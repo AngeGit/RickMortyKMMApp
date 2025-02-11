@@ -47,7 +47,7 @@ class RepositoryImpl(
         db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
     //endregion Characters
-    override suspend fun getAllEpisodes(): Flow<PagingData<EpisodeModel>> =
+    override fun getAllEpisodes(): Flow<PagingData<EpisodeModel>> =
         Pager(
             config = PagingConfig(
                 pageSize = MAX_CHARACTERS,
