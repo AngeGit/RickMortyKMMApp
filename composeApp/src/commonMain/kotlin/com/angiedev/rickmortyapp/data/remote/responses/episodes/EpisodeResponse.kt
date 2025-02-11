@@ -33,10 +33,10 @@ data class EpisodeResponse(
 
     private fun getVideoUrlFromSeasonEpisode(seasonEpisode: SeasonEpisode): String =
         when (seasonEpisode) {
-            SeasonEpisode.SEASON_1 -> "https://www.youtube.com/watch?v=8BEzj2kRjO8&ab_channel=RottenTomatoesTV"
-            SeasonEpisode.SEASON_2 -> "https://www.youtube.com/watch?v=SXwf_9xJu5c&ab_channel=Yusuto"
-            SeasonEpisode.SEASON_3 -> "https://www.youtube.com/watch?v=Bmg2vXOQ3kM&ab_channel=SeriesTrailerMP"
-            SeasonEpisode.SEASON_4 -> "https://www.youtube.com/watch?v=bLI2-v264No&ab_channel=RottenTomatoesTV"
+            SeasonEpisode.SEASON_1 -> "https://firebasestorage.googleapis.com/v0/b/rickmortykmm.firebasestorage.app/o/RICK%20Y%20MORTY%20(Trailer%20espa%C3%B1ol).mp4?alt=media&token=3e6763c9-df73-46e4-856d-511bdff1d8c2"
+            SeasonEpisode.SEASON_2 -> "https://firebasestorage.googleapis.com/v0/b/rickmortykmm.firebasestorage.app/o/RICK%20Y%20MORTY%20(Trailer%20espa%C3%B1ol).mp4?alt=media&token=3e6763c9-df73-46e4-856d-511bdff1d8c2"
+            SeasonEpisode.SEASON_3 -> "https://firebasestorage.googleapis.com/v0/b/rickmortykmm.firebasestorage.app/o/RICK%20Y%20MORTY%20(Trailer%20espa%C3%B1ol).mp4?alt=media&token=3e6763c9-df73-46e4-856d-511bdff1d8c2"
+            SeasonEpisode.SEASON_4 -> "https://www.youtube.com/watch?v=bLI2-v264No"
             SeasonEpisode.SEASON_5 -> "https://www.youtube.com/watch?v=yC1UxW8vcDo&ab_channel=RottenTomatoesTV"
             SeasonEpisode.SEASON_6 -> "https://www.youtube.com/watch?v=jerFRSQW9g8&ab_channel=RottenTomatoesTV"
             SeasonEpisode.SEASON_7 -> "https://www.youtube.com/watch?v=PkZtVBNkmso&ab_channel=RottenTomatoesTV"

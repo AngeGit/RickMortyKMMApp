@@ -10,8 +10,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.angiedev.rickmortyapp.ui.core.components.PagingGridWrapper
-import com.angiedev.rickmortyapp.ui.core.components.PagingType
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingType
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
