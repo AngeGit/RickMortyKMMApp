@@ -1,25 +1,38 @@
 package com.angiedev.rickmortyapp.ui.core.components.pagingtypes
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 
 @Composable
 fun <T : Any> PagingVerticalGridWrapper(
+    pagingListTitle: (@Composable () -> Unit)? = null,
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
-    firstItemList: (@Composable (T) -> Unit)? = null,
-    firstItemState: State<T>? = null,
-) = LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+    firstItemList: (@Composable () -> Unit)? = null,
+) = LazyVerticalGrid(
+    columns = GridCells.Fixed(2),
+    modifier = Modifier.fillMaxWidth().padding(8.dp),
+    verticalArrangement = Arrangement.Center,
+    horizontalArrangement = Arrangement.Center
+) {
+    pagingListTitle?.let {
+        item {
+            pagingListTitle()
+        }
+    }
 
-    firstItemList?.let { itemView ->
-        firstItemState?.value?.let { itemState ->
-            item (span = { GridItemSpan(2) }){
-                itemView(itemState)
-            }
+    firstItemList?.let {
+        item(span = { GridItemSpan(2)  }){
+            firstItemList()
         }
     }
 

@@ -32,7 +32,7 @@ fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
 
     Card(
         modifier = Modifier.fillMaxWidth()
-            .height(400.dp).padding(16.dp),
+            .height(400.dp).padding(8.dp),
         shape = RoundedCornerShape(12.dp),
     ) {
         characterOfTheDay?.let {
