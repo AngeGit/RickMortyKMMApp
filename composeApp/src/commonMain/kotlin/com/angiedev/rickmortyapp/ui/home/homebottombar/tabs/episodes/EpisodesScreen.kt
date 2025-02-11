@@ -1,14 +1,14 @@
 package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.episodes
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.angiedev.rickmortyapp.ui.core.components.PagingGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.PagingType
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -17,10 +17,14 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun EpisodesScreen() {
     val episodesViewModel = koinViewModel<EpisodesViewModel>()
-    val episodesState = episodesViewModel.state.collectAsStateWithLifecycle()
+    val episodesState = episodesViewModel.state.collectAsState()
     val episodes = episodesState.value.episodes.collectAsLazyPagingItems()
 
-    Box(modifier = Modifier.fillMaxSize().background(Color.Blue)) {
-        Text(text = "Episodes Screen")
+    Box(modifier = Modifier.fillMaxSize()) {
+        PagingGridWrapper(
+            pagingType = PagingType.ROW,
+            pagingItems = episodes,
+            itemView = { EpisodeItemList(it) }
+        )
     }
 }
