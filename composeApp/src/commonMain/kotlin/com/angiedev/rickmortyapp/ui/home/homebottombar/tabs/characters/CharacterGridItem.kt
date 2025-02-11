@@ -24,7 +24,8 @@ import com.angiedev.rickmortyapp.domain.model.CharacterModel
 @Composable
 fun CharacterItemList(character: CharacterModel) {
     Box(
-        modifier = Modifier.clip(RoundedCornerShape(24))
+        modifier = Modifier.padding(8.dp)
+            .clip(RoundedCornerShape(24))
             .border(
                 2.dp,
                 Color.Green,
@@ -41,6 +42,7 @@ fun CharacterItemList(character: CharacterModel) {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
+
         Box(
             modifier = Modifier.fillMaxWidth()
                 .height(60.dp)

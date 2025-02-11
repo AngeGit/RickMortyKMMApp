@@ -1,11 +1,17 @@
 package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.characters
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.angiedev.rickmortyapp.ui.core.components.PagingGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.PagingType
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -17,8 +23,21 @@ fun CharactersScreen() {
     val state = charactersViewModel.characterOfTheDayState.collectAsStateWithLifecycle()
     val characters = state.value.characters.collectAsLazyPagingItems()
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        CharactersGridList(characters,state)
+    Box(modifier = Modifier.fillMaxSize()) {
+        PagingGridWrapper(
+            pagingListTitle = {
+                Text(
+                    text = "Characters",
+                    color = Color.Green.copy(alpha = 0.8f),
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center,
+                )
+            },
+            pagingType = PagingType.VERITCAL_GRID,
+            pagingItems = characters,
+            itemView = { CharacterItemList(it) },
+            firstItemView = { CharacterOfTheDayComponent(state.value.characterOfTheDay) },
+        )
     }
 }
 
