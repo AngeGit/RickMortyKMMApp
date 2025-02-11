@@ -27,6 +27,7 @@ class EpisodesViewModel(
     fun onEpisodeSelected(selectedEpisode: EpisodeModel){
         _state.update { it.copy(playerVideoUrl = selectedEpisode.videoUrl) }
     }
+
     fun onVideoPlayerClose(){
         _state.update { it.copy(playerVideoUrl = "") }
     }
