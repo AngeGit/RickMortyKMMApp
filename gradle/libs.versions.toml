@@ -89,6 +89,7 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 #room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomCommon" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCommon" } #Anotaciones para Room
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqliteBundled" }#Sqlite
+youtube-player = { group= 'com.pierfrancescosoffritti.androidyoutubeplayer', name= 'core', version= '12.1.0'}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -99,3 +100,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 #room = { id = "androidx.room", version.ref = "roomCommon" } #Plugin still not working
 ksp-compose = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+

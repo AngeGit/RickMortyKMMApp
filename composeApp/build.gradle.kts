@@ -39,6 +39,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.youtube.player)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
