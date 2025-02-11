@@ -3,7 +3,6 @@ package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.episodes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
@@ -17,7 +16,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun EpisodesScreen() {
     val episodesViewModel = koinViewModel<EpisodesViewModel>()
-    val episodesState = episodesViewModel.state.collectAsState()
+    val episodesState = episodesViewModel.state.collectAsStateWithLifecycle()
     val episodes = episodesState.value.episodes.collectAsLazyPagingItems()
 
     Box(modifier = Modifier.fillMaxSize()) {
