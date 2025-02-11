@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 class GetAllEpisodesUseCase(
     private val repository: Repository
 ) {
-    suspend operator fun invoke(): Flow<PagingData<EpisodeModel>> = repository.getAllEpisodes()
+    operator fun invoke(): Flow<PagingData<EpisodeModel>> = repository.getAllEpisodes()
 }

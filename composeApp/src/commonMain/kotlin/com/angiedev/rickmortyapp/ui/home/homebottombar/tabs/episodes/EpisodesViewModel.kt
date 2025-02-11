@@ -4,37 +4,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.cash.paging.cachedIn
 import com.angiedev.rickmortyapp.domain.GetAllEpisodesUseCase
-import com.angiedev.rickmortyapp.domain.Repository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import com.angiedev.rickmortyapp.domain.model.EpisodeModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class EpisodesViewModel(
     val getAllEpisodesUseCase: GetAllEpisodesUseCase,
-    private val repository: Repository
 ): ViewModel() {
 
-    private val _state = MutableStateFlow<EpisodesState>(EpisodesState())
+    private val _state = MutableStateFlow(EpisodesState())
     val state: StateFlow<EpisodesState> = _state
 
     init {
         _state.update { state ->
             state.copy(
-                episodes = repository.getAllEpisodes().cachedIn(viewModelScope)
+                episodes = getAllEpisodesUseCase().cachedIn(viewModelScope)
             )
         }
+    }
 
-/*
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO){
-                getAllEpisodesUseCase()
-            }
-            _state.update { it.copy(episodes = result) }
-        }*/
+    fun onEpisodeSelected(selectedEpisode: EpisodeModel){
+        _state.update { it.copy(playerVideoUrl = selectedEpisode.videoUrl) }
+    }
+    fun onVideoPlayerClose(){
+        _state.update { it.copy(playerVideoUrl = "") }
     }
 
 }

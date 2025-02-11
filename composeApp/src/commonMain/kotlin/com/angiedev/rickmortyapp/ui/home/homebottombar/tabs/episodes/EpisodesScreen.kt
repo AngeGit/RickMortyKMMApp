@@ -1,13 +1,14 @@
 package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.episodes
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
-import com.angiedev.rickmortyapp.ui.core.components.PagingGridWrapper
-import com.angiedev.rickmortyapp.ui.core.components.PagingType
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingType
+import com.angiedev.rickmortyapp.ui.core.components.videoplayer.VideoPlayerView
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -19,11 +20,24 @@ fun EpisodesScreen() {
     val episodesState = episodesViewModel.state.collectAsStateWithLifecycle()
     val episodes = episodesState.value.episodes.collectAsLazyPagingItems()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         PagingGridWrapper(
             pagingType = PagingType.ROW,
             pagingItems = episodes,
-            itemView = { EpisodeItemList(it) }
+            itemView = {
+                EpisodeItemList(it) { selectedEpisode ->
+                    episodesViewModel.onEpisodeSelected(
+                        selectedEpisode
+                    )
+                }
+            }
         )
+
+        VideoPlayerView(
+            episodesState.value.playerVideoUrl,
+        ) { episodesViewModel.onVideoPlayerClose() }
     }
 }
+
