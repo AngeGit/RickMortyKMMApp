@@ -1,16 +1,15 @@
-package com.angiedev.rickmortyapp.ui.core.components.pagingtypes
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes
 
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import app.cash.paging.compose.LazyPagingItems
 
 @Composable
-fun <T : Any> PagingColumnWrapper(
+fun <T : Any> PagingRowWrapper(
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
     firstItemList: (@Composable () -> Unit)? = null,
-) = LazyColumn {
-
+) = LazyRow {
     firstItemList?.let {
         item {
             firstItemList()
@@ -18,9 +17,9 @@ fun <T : Any> PagingColumnWrapper(
     }
 
     //Default items list:
-    items(pagingItems.itemCount) { index ->
-        pagingItems[index]?.let {
-            itemView(it)
+    items(pagingItems.itemCount) { pos ->
+        pagingItems[pos]?.let { item->
+            itemView(item)
         }
     }
 }

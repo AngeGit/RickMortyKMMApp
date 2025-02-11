@@ -25,12 +25,12 @@ import rickmortykmmapp.composeapp.generated.resources.season6
 import rickmortykmmapp.composeapp.generated.resources.season7
 
 @Composable
-fun EpisodeItemList(episodeModel: EpisodeModel) {
+fun EpisodeItemList(episodeModel: EpisodeModel, onEpisodeSelected: (EpisodeModel) -> Unit) {
     Column(
         modifier = Modifier
             .width(120.dp)
             .padding(8.dp)
-            .clickable {  }
+            .clickable { onEpisodeSelected(episodeModel) }
     ) {
         Image(
             modifier = Modifier

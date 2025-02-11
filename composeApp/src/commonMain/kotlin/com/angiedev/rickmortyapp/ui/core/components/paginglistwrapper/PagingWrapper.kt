@@ -1,15 +1,15 @@
-package com.angiedev.rickmortyapp.ui.core.components
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper
 
 import androidx.compose.runtime.Composable
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
-import com.angiedev.rickmortyapp.ui.core.components.pagingdefaultviews.PagingEmptyView
-import com.angiedev.rickmortyapp.ui.core.components.pagingdefaultviews.PagingInitialLoadingView
-import com.angiedev.rickmortyapp.ui.core.components.pagingdefaultviews.PagingItemLoadingView
-import com.angiedev.rickmortyapp.ui.core.components.pagingtypes.PagingColumnWrapper
-import com.angiedev.rickmortyapp.ui.core.components.pagingtypes.PagingHorizontalGridWrapper
-import com.angiedev.rickmortyapp.ui.core.components.pagingtypes.PagingRowWrapper
-import com.angiedev.rickmortyapp.ui.core.components.pagingtypes.PagingVerticalGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingEmptyView
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingInitialLoadingView
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingItemLoadingView
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingColumnWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingHorizontalGridWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingRowWrapper
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingVerticalGridWrapper
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.angiedev.rickmortyapp.ui.core.components.pagingtypes
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

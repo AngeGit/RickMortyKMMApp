@@ -1,10 +1,10 @@
-package com.angiedev.rickmortyapp.ui.core.components.pagingdefaultviews
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,11 +12,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PagingItemLoadingView() {
+fun PagingEmptyView() {
     Box(
-        modifier = Modifier.fillMaxWidth().height(100.dp),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator(Modifier.size(64.dp), color = Color.Green)
+        Text("Lista vacía")
     }
 }

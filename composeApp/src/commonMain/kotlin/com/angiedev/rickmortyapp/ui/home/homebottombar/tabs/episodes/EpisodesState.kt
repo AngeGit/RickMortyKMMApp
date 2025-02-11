@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.emptyFlow
 
 data class EpisodesState(
     val episodes: Flow<PagingData<EpisodeModel>> = emptyFlow(),
+    val playerVideoUrl: String = "",
 )

@@ -1,4 +1,4 @@
-package com.angiedev.rickmortyapp.ui.core.components.pagingdefaultviews
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
