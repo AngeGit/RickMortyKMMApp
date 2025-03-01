@@ -49,7 +49,7 @@ fun <T : Any> PagingGridWrapper(
                         itemView = itemView
                     )
                 }
-                PagingType.VERITCAL_GRID -> {
+                PagingType.VERTICAL_GRID -> {
                     PagingVerticalGridWrapper(
                         pagingListTitle = pagingListTitle,
                         pagingItems = pagingItems,
@@ -78,6 +78,6 @@ fun <T : Any> PagingGridWrapper(
 enum class PagingType {
     ROW,
     COLUMN,
-    VERITCAL_GRID,
+    VERTICAL_GRID,
     HORIZONTAL_GRID
 }
