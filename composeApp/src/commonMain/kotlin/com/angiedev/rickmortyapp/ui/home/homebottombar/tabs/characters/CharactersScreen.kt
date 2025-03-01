@@ -10,6 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingGridWrapper
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingType
 import org.koin.compose.viewmodel.koinViewModel
@@ -18,7 +19,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CharactersScreen() {
+fun CharactersScreen(
+    onNavigateDetail: (CharacterModel) -> Unit
+) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state = charactersViewModel.characterOfTheDayState.collectAsStateWithLifecycle()
     val characters = state.value.characters.collectAsLazyPagingItems()
@@ -33,9 +36,11 @@ fun CharactersScreen() {
                     textAlign = TextAlign.Center,
                 )
             },
-            pagingType = PagingType.VERITCAL_GRID,
+            pagingType = PagingType.VERTICAL_GRID,
             pagingItems = characters,
-            itemView = { CharacterItemList(it) },
+            itemView = { characterModel ->
+                CharacterItemList(characterModel) { onNavigateDetail(characterModel) }
+            },
             firstItemView = { CharacterOfTheDayComponent(state.value.characterOfTheDay) },
         )
     }
