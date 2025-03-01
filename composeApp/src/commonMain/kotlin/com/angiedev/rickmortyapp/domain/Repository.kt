@@ -12,4 +12,5 @@ interface Repository {
     suspend fun getCharacter(id: Int): CharacterModel
     fun getAllCharacters(): Flow<PagingData<CharacterModel>>
     fun getAllEpisodes(): Flow<PagingData<EpisodeModel>>
+    suspend fun getEpisodes(episodeList: List<String>): List<EpisodeModel>
 }

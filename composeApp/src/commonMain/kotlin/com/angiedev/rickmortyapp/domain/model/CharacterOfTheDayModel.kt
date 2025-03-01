@@ -1,6 +1,8 @@
 package com.angiedev.rickmortyapp.domain.model
 
 import com.angiedev.rickmortyapp.data.local.entities.CharacterOfTheDayEntity
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 data class CharacterOfTheDayModel(
     val character: CharacterModel,
@@ -11,6 +13,10 @@ data class CharacterOfTheDayModel(
         status = character.isAlive,
         image = character.image,
         name = character.name,
-        selectedDate = selectedDate
+        selectedDate = selectedDate,
+        species = character.species,
+        gender = character.gender,
+        origin = character.origin,
+        episodes = Json.encodeToString(character.episodes)
     )
 }
