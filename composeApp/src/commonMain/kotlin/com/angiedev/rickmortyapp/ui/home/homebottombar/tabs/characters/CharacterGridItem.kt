@@ -22,7 +22,10 @@ import coil3.compose.AsyncImage
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 
 @Composable
-fun CharacterItemList(character: CharacterModel) {
+fun CharacterItemList(
+    character: CharacterModel,
+    onItemSelected: () -> Unit
+) {
     Box(
         modifier = Modifier.padding(8.dp)
             .clip(RoundedCornerShape(24))
@@ -32,7 +35,7 @@ fun CharacterItemList(character: CharacterModel) {
                 shape = RoundedCornerShape(0,24,0,24)
             ).fillMaxSize()
             .clickable {
-                //go to Detail
+                onItemSelected()
             },
         contentAlignment = Alignment.BottomCenter
     ) {
