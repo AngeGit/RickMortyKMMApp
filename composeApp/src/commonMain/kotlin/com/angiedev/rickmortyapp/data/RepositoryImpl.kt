@@ -47,6 +47,7 @@ class RepositoryImpl(
         db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
     //endregion Characters
+    //region Episodes
     override fun getAllEpisodes(): Flow<PagingData<EpisodeModel>> =
         Pager(
             config = PagingConfig(
@@ -55,5 +56,14 @@ class RepositoryImpl(
             )
         ) { episodesPagingSources }.flow
 
+    override suspend fun getEpisodes(episodeList: List<String>): List<EpisodeModel> =
+        when (episodeList.size) {
+            0 -> emptyList()
+            1 -> listOf(api.getSingleEpisode(episodeList.first()).toDomain())
+            else -> api.getEpisodes(episodeList.joinToString(",")).map {
+                it.toDomain()
+            }
+        }
+    //endregion Episodes
 
 }
