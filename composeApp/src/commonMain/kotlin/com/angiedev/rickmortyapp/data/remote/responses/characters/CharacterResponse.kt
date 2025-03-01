@@ -9,6 +9,10 @@ data class CharacterResponse(
     val status: String,
     val image: String,
     val name:String,
+    val species: String,
+    val gender: String,
+    val origin: OriginResponse,
+    val episode: List<String>
 ) {
     companion object {
         const val IS_ALIVE = "alive"
@@ -18,6 +22,12 @@ data class CharacterResponse(
         id = id,
         isAlive = status.lowercase() == IS_ALIVE,
         image = image,
-        name = name
+        name = name,
+        species = species,
+        gender = gender,
+        origin = origin.name,
+        episodes = episode.map {
+            it.substringAfterLast("/")
+        }
     )
 }

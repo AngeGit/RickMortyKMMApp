@@ -12,7 +12,11 @@ fun Preview(){
         id=3,
         image="",
         isAlive=true,
-        name="Rick"
+        name = "Rick",
+        species = "Human",
+        gender = "",
+        origin = "",
+        episodes = emptyList()
     ))
 
 }

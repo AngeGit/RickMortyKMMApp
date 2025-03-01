@@ -3,8 +3,8 @@ package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper
 import androidx.compose.runtime.Composable
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
+import com.angiedev.rickmortyapp.ui.core.components.Loading
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingEmptyView
-import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingInitialLoadingView
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingItemLoadingView
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingColumnWrapper
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingHorizontalGridWrapper
@@ -18,7 +18,7 @@ fun <T : Any> PagingGridWrapper(
     pagingType: PagingType,
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
-    initialLoadingView: @Composable () -> Unit = { PagingInitialLoadingView() },
+    initialLoadingView: @Composable () -> Unit = { Loading() },
     emptyListView: @Composable () -> Unit = { PagingEmptyView() },
     firstItemView: (@Composable () -> Unit)? = null,
     itemLoadingView: @Composable () -> Unit = { PagingItemLoadingView() },
