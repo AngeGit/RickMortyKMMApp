@@ -4,16 +4,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.ui.core.DefaultTextColor
+import com.angiedev.rickmortyapp.ui.core.Green
 
 
 @Composable
 fun CharacterInfo(characterModel: CharacterModel, modifier: Modifier) {
     CharacterCard(modifier) {
-        Text(text = "ABOUT THE CHARACTER", fontWeight = FontWeight.Bold)
-        CustomSpacer()
+        CharacterDetailTitle(text = "ABOUT THE CHARACTER")
+        CustomVerticalSpacer()
         CharacterInfoDetail("Origin", characterModel.origin)
         CharacterInfoDetail("Gender", characterModel.gender)
     }
@@ -22,8 +23,9 @@ fun CharacterInfo(characterModel: CharacterModel, modifier: Modifier) {
 @Composable
 fun CharacterInfoDetail(title: String, detail: String) {
     Row {
-        Text(text = title, color = Color.White, fontWeight = FontWeight.Bold)
-        Text(text = detail, color = Color.Green)
+        Text(text = title, color = DefaultTextColor, fontWeight = FontWeight.Bold)
+        CustomHorizontalSpacer()
+        Text(text = detail, color = Green)
     }
 }
 
