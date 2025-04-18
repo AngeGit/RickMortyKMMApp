@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,13 +18,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.ui.core.Green
+import com.angiedev.rickmortyapp.ui.core.Pink
+import com.angiedev.rickmortyapp.ui.core.Red
+import com.angiedev.rickmortyapp.ui.core.primaryBlack
+import com.angiedev.rickmortyapp.ui.core.primaryWhite
 import com.angiedev.rickmortyapp.ui.extensions.aliveBorder
 import org.jetbrains.compose.resources.painterResource
 import rickmortykmmapp.composeapp.generated.resources.Res
@@ -48,7 +51,7 @@ fun MainHeader(characterModel: CharacterModel) {
 }
 
 @Composable
-fun CharacterHeader(characterModel: CharacterModel, modifier: Modifier) {
+fun CharacterHeader(characterModel: CharacterModel, modifier: Modifier) =
     Box(
         modifier = modifier,
         contentAlignment = Alignment.BottomCenter
@@ -56,21 +59,20 @@ fun CharacterHeader(characterModel: CharacterModel, modifier: Modifier) {
         CharacterTitleBox(characterModel.name, characterModel.species)
         CharacterImageBox(characterModel.image, characterModel.isAlive)
     }
-}
 
 @Composable
-fun CharacterImageBox(image: String, isAlive: Boolean) {
+fun CharacterImageBox(image: String, isAlive: Boolean) =
     Column(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        CustomSpacer()
+        CustomVerticalSpacer()
         Box(contentAlignment = Alignment.TopCenter) {
             Box(
                 modifier = Modifier.size(205.dp)
                     .clip(CircleShape)
-                    .background(Color.Black.copy(0.15f)),
+                    .background(primaryBlack.copy(alpha = 0.15f)),
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
@@ -85,39 +87,37 @@ fun CharacterImageBox(image: String, isAlive: Boolean) {
 
             Text(
                 "ALIVE".takeIf { isAlive } ?: "DEAD",
-                color = Color.White,
+                color = primaryWhite,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .clip(RoundedCornerShape(30))
-                    .background(Color.Green.takeIf { isAlive } ?: Color.Red)
+                    .background(Green.takeIf { isAlive } ?: Red)
                     .padding(horizontal = 6.dp, vertical = 2.dp)
             )
         }
+
         Spacer(modifier = Modifier.weight(1f))
     }
-}
 
 @Composable
 fun CharacterTitleBox(
     characterName: String,
     characterSpecies: String
+) = Column(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(100.dp)
+        .clip(RoundedCornerShape(topStartPercent = 10, topEndPercent = 10))
+        .background(color = primaryWhite),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .clip(RoundedCornerShape(topStartPercent = 10, topEndPercent = 10))
-            .background(color = Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            characterName,
-            color = Color.Black,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Text("Especie: $characterSpecies", color = Color.Black)
-    }
+    Text(
+        characterName,
+        color = Pink,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold
+    )
+    Text("Especie: $characterSpecies", color = primaryBlack)
 }

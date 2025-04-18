@@ -5,17 +5,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.ui.core.BackgroundSecondaryColor
+import com.angiedev.rickmortyapp.ui.core.primaryWhite
 import com.angiedev.rickmortyapp.ui.detail.CharacterDetailViewModel
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterEpisodesList
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterInfo
-import com.angiedev.rickmortyapp.ui.detail.screen.components.CustomSpacer
 import com.angiedev.rickmortyapp.ui.detail.screen.components.MainHeader
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -28,16 +30,26 @@ fun CharacterDetailScreen(
 ) {
     val characterDetailViewModel =
         koinViewModel<CharacterDetailViewModel>(parameters = { parameterSetOf(characterModel) })
+
     val state by characterDetailViewModel.uiState.collectAsStateWithLifecycle()
 
+    val mainModifier = Modifier.fillMaxSize().background(color = primaryWhite)
+    val bodyModifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp).fillMaxWidth()
+
     Column(
-        modifier = Modifier.fillMaxSize()
-            .background(color = Color.White)
+        modifier = mainModifier
     ) {
-        val bodyModifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth()
         MainHeader(state.characterModel)
-        CharacterInfo(state.characterModel, bodyModifier)
-        CustomSpacer()
-        CharacterEpisodesList(state.episodeList, bodyModifier)
+        Column(
+            modifier = mainModifier
+                .clip(RoundedCornerShape(topStartPercent = 5, topEndPercent = 5))
+                .background(color = BackgroundSecondaryColor)
+        ) {
+            CharacterInfo(state.characterModel, bodyModifier.padding(16.dp))
+            CharacterEpisodesList(
+                state.episodeList,
+                bodyModifier.padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
+            )
+        }
     }
 }
