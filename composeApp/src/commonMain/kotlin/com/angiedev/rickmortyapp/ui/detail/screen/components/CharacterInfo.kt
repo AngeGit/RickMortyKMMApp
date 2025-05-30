@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
-import com.angiedev.rickmortyapp.ui.core.DefaultTextColor
-import com.angiedev.rickmortyapp.ui.core.Green
+import com.angiedev.rickmortyapp.ui.core.resources.DefaultTextColor
+import com.angiedev.rickmortyapp.ui.core.resources.Green
 
 
 @Composable
@@ -28,5 +28,3 @@ fun CharacterInfoDetail(title: String, detail: String) {
         Text(text = detail, color = Green)
     }
 }
-
-

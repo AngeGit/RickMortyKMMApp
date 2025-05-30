@@ -14,8 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import com.angiedev.rickmortyapp.ui.core.BackgroundTertiaryColor
-import com.angiedev.rickmortyapp.ui.core.DefaultTextColor
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundTertiaryColor
+import com.angiedev.rickmortyapp.ui.core.resources.DefaultTextColor
 
 
 @Composable
