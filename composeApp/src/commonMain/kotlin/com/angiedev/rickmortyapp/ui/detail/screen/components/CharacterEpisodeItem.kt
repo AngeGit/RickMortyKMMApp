@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.angiedev.rickmortyapp.domain.model.EpisodeModel
-import com.angiedev.rickmortyapp.ui.core.DefaultTextColor
+import com.angiedev.rickmortyapp.ui.core.resources.DefaultTextColor
 
 @Composable
 fun CharacterEpisodeItem(episode: EpisodeModel) =
@@ -30,7 +30,3 @@ fun CharacterEpisodeItem(episode: EpisodeModel) =
             fontStyle = FontStyle.Italic
         )
     }
-
-
-
-

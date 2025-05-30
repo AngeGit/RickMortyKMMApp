@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
-import com.angiedev.rickmortyapp.ui.core.Green
-import com.angiedev.rickmortyapp.ui.core.Pink
-import com.angiedev.rickmortyapp.ui.core.Red
-import com.angiedev.rickmortyapp.ui.core.primaryBlack
-import com.angiedev.rickmortyapp.ui.core.primaryWhite
+import com.angiedev.rickmortyapp.ui.core.resources.Green
+import com.angiedev.rickmortyapp.ui.core.resources.Pink
+import com.angiedev.rickmortyapp.ui.core.resources.Red
+import com.angiedev.rickmortyapp.ui.core.resources.primaryBlack
+import com.angiedev.rickmortyapp.ui.core.resources.primaryWhite
 import com.angiedev.rickmortyapp.ui.extensions.aliveBorder
 import org.jetbrains.compose.resources.painterResource
 import rickmortykmmapp.composeapp.generated.resources.Res

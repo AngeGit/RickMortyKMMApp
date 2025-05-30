@@ -3,11 +3,10 @@ package com.angiedev.rickmortyapp.ui.extensions
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.dp
-import com.angiedev.rickmortyapp.ui.core.Green
-import com.angiedev.rickmortyapp.ui.core.Red
+import com.angiedev.rickmortyapp.ui.core.resources.Green
+import com.angiedev.rickmortyapp.ui.core.resources.Red
 
 fun Modifier.vertical() = layout {measurable, constraints ->
     val placeable = measurable.measure(constraints)

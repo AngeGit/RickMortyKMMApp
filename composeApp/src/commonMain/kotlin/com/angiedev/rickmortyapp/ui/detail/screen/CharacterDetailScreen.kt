@@ -13,8 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
-import com.angiedev.rickmortyapp.ui.core.BackgroundSecondaryColor
-import com.angiedev.rickmortyapp.ui.core.primaryWhite
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
+import com.angiedev.rickmortyapp.ui.core.resources.primaryWhite
 import com.angiedev.rickmortyapp.ui.detail.CharacterDetailViewModel
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterEpisodesList
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterInfo

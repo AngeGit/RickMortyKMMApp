@@ -18,6 +18,7 @@ fun <T : Any> PagingGridWrapper(
     pagingType: PagingType,
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
+    progress: ((Float) -> Unit)? = null,
     initialLoadingView: @Composable () -> Unit = { Loading() },
     emptyListView: @Composable () -> Unit = { PagingEmptyView() },
     firstItemView: (@Composable () -> Unit)? = null,
@@ -39,7 +40,8 @@ fun <T : Any> PagingGridWrapper(
                     PagingRowWrapper(
                         pagingItems = pagingItems,
                         firstItemList = firstItemView,
-                        itemView = itemView
+                        itemView = itemView,
+                        progress = progress
                     )
                 }
                 PagingType.COLUMN -> {
@@ -73,7 +75,6 @@ fun <T : Any> PagingGridWrapper(
         }
     }
 }
-
 
 enum class PagingType {
     ROW,
