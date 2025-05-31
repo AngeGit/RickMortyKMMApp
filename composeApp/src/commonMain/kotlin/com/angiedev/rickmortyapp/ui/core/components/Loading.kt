@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.angiedev.rickmortyapp.ui.core.resources.BrightGreen
 
 
 @Composable
@@ -15,6 +16,6 @@ fun Loading() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator(color = Color.Green.copy(alpha = 0.5f))
+        CircularProgressIndicator(color = BrightGreen.copy(alpha = 0.5f))
     }
 }

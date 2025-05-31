@@ -44,6 +44,7 @@ fun MainHeader(characterModel: CharacterModel) {
             painterResource(Res.drawable.space),
             contentDescription = "Background Header",
             modifier = Modifier.fillMaxSize(),
+
             contentScale = ContentScale.Crop
         )
         CharacterHeader(characterModel, mainHeaderModifier)
@@ -108,7 +109,7 @@ fun CharacterTitleBox(
     modifier = Modifier
         .fillMaxWidth()
         .height(100.dp)
-        .clip(RoundedCornerShape(topStartPercent = 10, topEndPercent = 10))
+        .clip(RoundedCornerShape(topStartPercent = CHARACTER_CARD_ROUNDED_CORNER, topEndPercent = CHARACTER_CARD_ROUNDED_CORNER))
         .background(color = primaryWhite),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center

@@ -1,21 +1,30 @@
 package com.angiedev.rickmortyapp.ui.home.homebottombar.tabs.characters
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingGridWrapper
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingType
+import com.angiedev.rickmortyapp.ui.core.resources.AppTypography
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundPrimaryColor
+import com.angiedev.rickmortyapp.ui.core.resources.BrightGreen
+import com.angiedev.rickmortyapp.ui.core.resources.Strings
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
-
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -26,16 +35,13 @@ fun CharactersScreen(
     val state = charactersViewModel.characterOfTheDayState.collectAsStateWithLifecycle()
     val characters = state.value.characters.collectAsLazyPagingItems()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundPrimaryColor)
+    ) {
         PagingGridWrapper(
-            pagingListTitle = {
-                Text(
-                    text = "Characters",
-                    color = Color.Green.copy(alpha = 0.8f),
-                    fontSize = 24.sp,
-                    textAlign = TextAlign.Center,
-                )
-            },
+            pagingListTitle = { CharactersListTitle() },
             pagingType = PagingType.VERTICAL_GRID,
             pagingItems = characters,
             itemView = { characterModel ->
@@ -44,6 +50,16 @@ fun CharactersScreen(
             firstItemView = { CharacterOfTheDayComponent(state.value.characterOfTheDay) },
         )
     }
+}
+
+@Composable
+private fun CharactersListTitle() {
+    Text(
+        modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+        text = Strings.CHARACTERS_LIST_TITLE,
+        color = BrightGreen.copy(alpha = 0.8f),
+        style = AppTypography.semiboldL,
+    )
 }
 
 
