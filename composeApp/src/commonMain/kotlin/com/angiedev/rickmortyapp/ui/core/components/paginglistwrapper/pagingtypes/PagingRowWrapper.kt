@@ -17,7 +17,7 @@ fun <T : Any> PagingRowWrapper(
 
     progress?.invoke(
         (scrollState.firstVisibleItemIndex.toFloat() / (scrollState.layoutInfo.totalItemsCount - 1))
-            .takeIf { scrollState.layoutInfo.totalItemsCount > 0 } ?: 0f
+            .takeIf { scrollState.layoutInfo.totalItemsCount > 1 } ?: 0f
     )
 
     LazyRow(

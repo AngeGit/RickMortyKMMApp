@@ -13,9 +13,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.domain.model.EpisodeModel
 import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
 import com.angiedev.rickmortyapp.ui.core.resources.primaryWhite
 import com.angiedev.rickmortyapp.ui.detail.CharacterDetailViewModel
+import com.angiedev.rickmortyapp.ui.detail.screen.components.CHARACTER_CARD_ROUNDED_CORNER
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterEpisodesList
 import com.angiedev.rickmortyapp.ui.detail.screen.components.CharacterInfo
 import com.angiedev.rickmortyapp.ui.detail.screen.components.MainHeader
@@ -45,10 +47,13 @@ fun CharacterDetailScreen(
                 .clip(RoundedCornerShape(topStartPercent = 5, topEndPercent = 5))
                 .background(color = BackgroundSecondaryColor)
         ) {
-            CharacterInfo(state.characterModel, bodyModifier.padding(16.dp))
+            CharacterInfo(
+                state.characterModel,
+                bodyModifier.padding(horizontal = 16.dp).padding(top = 20.dp)
+            )
             CharacterEpisodesList(
                 state.episodeList,
-                bodyModifier.padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
+                bodyModifier.padding(horizontal = 16.dp, vertical = 20.dp).padding(bottom = 20.dp)
             )
         }
     }
