@@ -20,6 +20,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import com.angiedev.rickmortyapp.ui.core.resources.AppTypography
+import com.angiedev.rickmortyapp.ui.core.resources.Strings
+import com.angiedev.rickmortyapp.ui.core.resources.primaryWhite
 
 @Composable
 fun CharacterItemList(
@@ -27,44 +30,62 @@ fun CharacterItemList(
     onItemSelected: () -> Unit
 ) {
     Box(
-        modifier = Modifier.padding(8.dp)
-            .clip(RoundedCornerShape(24))
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(ITEM_PADDING)
+            .clip(ITEM_SHAPE)
             .border(
-                2.dp,
-                Color.Green,
-                shape = RoundedCornerShape(0,24,0,24)
-            ).fillMaxSize()
-            .clickable {
-                onItemSelected()
-            },
+                width = ITEM_BORDER_WIDTH,
+                color = ITEM_BORDER_COLOR,
+                shape = ITEM_SHAPE
+            )
+            .clickable { onItemSelected() },
         contentAlignment = Alignment.BottomCenter
     ) {
-        AsyncImage(
-            model = character.image,
-            contentDescription = "Character:${character.name}",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-
-        Box(
-            modifier = Modifier.fillMaxWidth()
-                .height(60.dp)
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color.Black.copy(alpha = 0f),
-                            Color.Black.copy(alpha = 0.6f),
-                            Color.Black.copy(alpha = 0.9f)
-                        )
-                    )
-                ),
-            contentAlignment = Alignment.Center
-        ){
-            Text(
-                text = character.name,
-                color = Color.White,
-                modifier = Modifier.padding(8.dp)
-            )
-        }
+        CharacterImage(character)
+        CharacterName(character.name)
     }
 }
+
+@Composable
+private fun CharacterImage(character: CharacterModel) {
+    AsyncImage(
+        modifier = Modifier.fillMaxSize(),
+        model = character.image,
+        contentDescription = Strings.cdCharacterOfTheDay(character.name),
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
+private fun CharacterName(name: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(NAME_OVERLAY_HEIGHT)
+            .background(NAME_OVERLAY_GRADIENT),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = name,
+            color = primaryWhite,
+            style = AppTypography.regularXS,
+            modifier = Modifier.padding(NAME_PADDING)
+        )
+    }
+}
+
+// Constantes
+private val ITEM_PADDING = 8.dp
+private val ITEM_SHAPE = RoundedCornerShape(0, 24, 0, 24)
+private val ITEM_BORDER_WIDTH = 2.dp
+private val ITEM_BORDER_COLOR = Color.Green
+private val NAME_OVERLAY_HEIGHT = 60.dp
+private val NAME_PADDING = 8.dp
+private val NAME_OVERLAY_GRADIENT = Brush.verticalGradient(
+    colors = listOf(
+        Color.Black.copy(alpha = 0f),
+        Color.Black.copy(alpha = 0.6f),
+        Color.Black.copy(alpha = 0.9f)
+    )
+)
