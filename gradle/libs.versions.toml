@@ -13,7 +13,7 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
-kotlin = "2.1.0"
+kotlin = "2.1.21"
 navigation = "2.8.0-alpha10"
 koin = "3.5.6"
 koinCompose = "1.1.5"
@@ -26,7 +26,7 @@ kotlinDateTime = "0.6.0"
 
 #Room
 roomCommon = "2.7.0-alpha12"
-ksp = "2.0.21-1.0.27"
+ksp = "2.1.21-2.0.1"
 androidx-sqliteBundled = "2.5.0-alpha12"
 
 
