@@ -21,11 +21,11 @@ val DefaultTextColor
     @Composable
     get() = if(isSystemInDarkTheme()) Color.White else Color.Black
 
-val PlaceholderBorderColor
+val HighlightBorderColor
     @Composable
     get() = if (isSystemInDarkTheme()) BrightGreen else Green
 
-val PlaceholderShadowColor
+val HighlightShadowColor
     @Composable
     get() = if (isSystemInDarkTheme()) BrightGreen.copy(alpha = 0.3f) else Green.copy(alpha = 0.8f)
 

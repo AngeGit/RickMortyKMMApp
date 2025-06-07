@@ -10,10 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
@@ -21,7 +18,7 @@ import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingGrid
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.PagingType
 import com.angiedev.rickmortyapp.ui.core.resources.AppTypography
 import com.angiedev.rickmortyapp.ui.core.resources.BackgroundPrimaryColor
-import com.angiedev.rickmortyapp.ui.core.resources.BrightGreen
+import com.angiedev.rickmortyapp.ui.core.resources.HighlightBorderColor
 import com.angiedev.rickmortyapp.ui.core.resources.Strings
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -53,11 +50,14 @@ fun CharactersScreen(
 }
 
 @Composable
-private fun CharactersListTitle() {
+private fun BoxScope.CharactersListTitle() {
     Text(
-        modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+        .align(Alignment.Center),
         text = Strings.CHARACTERS_LIST_TITLE,
-        color = BrightGreen.copy(alpha = 0.8f),
+        color = HighlightBorderColor.copy(alpha = 0.8f),
         style = AppTypography.semiboldL,
     )
 }

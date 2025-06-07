@@ -29,7 +29,11 @@ object AppTypography {
     val regularXS = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontSize = 16.sp,
+    )
 
+    val regularXXS = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontSize = 12.sp,
     )
     val regularBoldS = regularS.copy(fontWeight = FontWeight.Bold)
     val regularBoldXS = regularXS.copy(fontWeight = FontWeight.Bold)
