@@ -1,7 +1,6 @@
 package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -25,7 +24,7 @@ fun <T : Any> PagingVerticalGridWrapper(
     horizontalArrangement = Arrangement.Center
 ) {
     pagingListTitle?.let {
-        item {
+        item(span = { GridItemSpan(2)  }){
             pagingListTitle()
         }
     }
