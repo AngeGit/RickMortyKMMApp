@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
 import com.angiedev.rickmortyapp.ui.core.resources.DefaultTextColor
-import com.angiedev.rickmortyapp.ui.core.resources.PlaceholderBorderColor
-import com.angiedev.rickmortyapp.ui.core.resources.PlaceholderShadowColor
+import com.angiedev.rickmortyapp.ui.core.resources.HighlightBorderColor
+import com.angiedev.rickmortyapp.ui.core.resources.HighlightShadowColor
 import com.angiedev.rickmortyapp.ui.core.resources.Strings
 import org.jetbrains.compose.resources.painterResource
 import rickmortykmmapp.composeapp.generated.resources.Res
@@ -52,7 +52,7 @@ fun VideoPlayerView(
             modifier = Modifier.fillMaxWidth()
                 .height(250.dp)
                 .padding(16.dp)
-                .border(5.dp, PlaceholderBorderColor, shape = CardDefaults.elevatedShape),
+                .border(5.dp, HighlightBorderColor, shape = CardDefaults.elevatedShape),
             colors = CardDefaults.elevatedCardColors()
                 .copy(containerColor = BackgroundSecondaryColor).takeIf { !condition }
                 ?: CardDefaults.elevatedCardColors()
@@ -83,7 +83,7 @@ private fun VideoPlaceHolder() {
                 .align(Alignment.TopCenter)
                 .background(
                     brush = Brush.verticalGradient(
-                        colors = listOf(PlaceholderShadowColor, Color.Transparent)
+                        colors = listOf(HighlightShadowColor, Color.Transparent)
                     )
                 )
                 .padding(16.dp),

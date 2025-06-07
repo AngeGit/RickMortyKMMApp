@@ -10,7 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
-import com.angiedev.rickmortyapp.ui.core.resources.PlaceholderBorderColor
+import com.angiedev.rickmortyapp.ui.core.resources.HighlightBorderColor
 
 
 @Composable
@@ -21,7 +21,7 @@ fun EpisodesProgressBar(scrollProgress: Float) {
     LinearProgressIndicator(
         modifier = Modifier.fillMaxWidth(),
         progress = { animatedProgress },
-        color = PlaceholderBorderColor,
+        color = HighlightBorderColor,
         trackColor = BackgroundSecondaryColor,
         gapSize = 8.dp,
         drawStopIndicator = {},

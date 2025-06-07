@@ -9,6 +9,7 @@ object Strings {
     const val CHARACTER_DETAIL_ABOUT = "ABOUT THE CHARACTER"
     const val CHARACTER_DETAIL_ORIGIN= "Origin"
     const val CHARACTER_DETAIL_GENDER = "Gender"
+    const val CD_TOPAPPBAR = "Rick & Morty Definitive App"
 
     fun cdEpisodeImage(name: String) = "Episode $name image"
     fun cdCharacterOfTheDay(name: String) = "Character of the day: $name"

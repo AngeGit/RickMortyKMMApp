@@ -1,14 +1,25 @@
 package com.angiedev.rickmortyapp.ui.core.navigation.bottomnavigation
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.angiedev.rickmortyapp.ui.home.homebottombar.navigation.HomeBottomBarItem
+import com.angiedev.rickmortyapp.ui.core.resources.AppTypography
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundTertiaryColor
+import com.angiedev.rickmortyapp.ui.core.resources.BrightGreen
+import com.angiedev.rickmortyapp.ui.core.resources.DefaultTextColor
+import com.angiedev.rickmortyapp.ui.core.resources.HighlightBorderColor
 
 
 @Composable
@@ -16,7 +27,11 @@ fun BottomBarNavigation(items: List<BottomBarItem>, navController: NavHostContro
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar {
+    NavigationBar(
+        modifier = Modifier.fillMaxWidth().height(72.dp),
+        containerColor = BackgroundSecondaryColor,
+        contentColor = BrightGreen
+    ) {
         items.forEach { item ->
             NavigationBarItem(
                 icon = item.icon,
@@ -36,7 +51,18 @@ fun BottomBarNavigation(items: List<BottomBarItem>, navController: NavHostContro
                     }
                 },
                 selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
-                label = { Text(item.title) }
+                label = {
+                    Text(
+                        text = item.title,
+                        color = DefaultTextColor,
+                        style = AppTypography.regularXXS
+                    )
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = HighlightBorderColor,
+                    selectedIconColor = BackgroundTertiaryColor,
+                    unselectedIconColor = HighlightBorderColor,
+                ),
             )
         }
     }
