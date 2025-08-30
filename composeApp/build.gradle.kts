@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.youtube.player)
-
+            implementation(libs.androidx.splashscreen)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -113,4 +113,3 @@ dependencies {
     add("kspIosArm64", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
 }
-
