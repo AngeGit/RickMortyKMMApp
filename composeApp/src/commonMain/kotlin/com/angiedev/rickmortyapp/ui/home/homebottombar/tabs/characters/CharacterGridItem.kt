@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
@@ -70,7 +71,8 @@ private fun CharacterName(name: String) {
             text = name,
             color = primaryWhite,
             style = AppTypography.regularXS,
-            modifier = Modifier.padding(NAME_PADDING)
+            modifier = Modifier.padding(NAME_PADDING),
+            textAlign = TextAlign.Center
         )
     }
 }
