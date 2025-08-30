@@ -27,8 +27,9 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
-	<key>UILaunchScreen</key>
-	<dict/>
+	<!-- Splash Screen configuration -->
+	<key>UILaunchStoryboardName</key>
+	<string>Splash Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
