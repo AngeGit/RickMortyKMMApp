@@ -23,6 +23,8 @@ viewmodel = "2.8.0"
 coil = "3.0.0-rc01"
 pagingComposeCommon = "3.3.0-alpha02-0.4.0"
 kotlinDateTime = "0.6.0"
+androidx-splashscreen = "1.0.1"
+youtubePlayer = "12.1.2"
 
 #Room
 roomCommon = "2.7.0-alpha12"
@@ -43,6 +45,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+
 # Navigation
 navigation-compose = { module="org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
@@ -89,7 +92,12 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 #room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomCommon" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCommon" } #Anotaciones para Room
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqliteBundled" }#Sqlite
-youtube-player = { group= 'com.pierfrancescosoffritti.androidyoutubeplayer', name= 'core', version= '12.1.0'}
+
+# YouTube Player
+youtube-player = { group= 'com.pierfrancescosoffritti.androidyoutubeplayer', name= 'core', version.ref = 'youtubePlayer' }
+
+# Splash Screen
+androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-splashscreen" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -100,4 +108,3 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 #room = { id = "androidx.room", version.ref = "roomCommon" } #Plugin still not working
 ksp-compose = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-
