@@ -107,6 +107,13 @@ ksp {
     arg("room.schemaLocation", "${projectDir}/schemas")
 }
 
+// On a machine without ~/.konan (a clean CI runner or a fresh clone), the iOS KSP tasks run before
+// Kotlin/Native is downloaded and Room's processor fails with "cannot find required type
+// kotlin.coroutines.Continuation". Commonizing the native distribution downloads it first.
+tasks.matching { it.name.startsWith("ksp") && it.name.contains("Ios") }.configureEach {
+    dependsOn("commonizeNativeDistribution")
+}
+
 dependencies {
     debugImplementation(compose.uiTooling)
 
