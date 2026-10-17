@@ -6,9 +6,12 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.random.Random
 
 class GetCharacterOfTheDayUseCase(
-    private val repository: Repository
+    private val repository: Repository,
+    private val clock: Clock,
+    private val random: Random,
 ) {
     suspend operator fun invoke(): CharacterModel {
         val selectedDay = getCurrentDayOfTheYear()
@@ -20,7 +23,7 @@ class GetCharacterOfTheDayUseCase(
 
     private fun getCurrentDayOfTheYear(): String {
         val localTime: LocalDateTime =
-            Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+            clock.now().toLocalDateTime(TimeZone.currentSystemDefault())
         return "${localTime.dayOfYear}${localTime.year}"
     }
 
@@ -30,7 +33,7 @@ class GetCharacterOfTheDayUseCase(
         }
     }
 
-    private suspend fun getRandomCharacter() = repository.getCharacter((1..826).random())
+    private suspend fun getRandomCharacter() = repository.getCharacter((1..826).random(random))
 
     private suspend fun saveCharacterOfTheDay(
         characterModel: CharacterModel,
