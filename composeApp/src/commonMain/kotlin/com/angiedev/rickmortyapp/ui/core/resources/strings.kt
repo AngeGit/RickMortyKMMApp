@@ -10,6 +10,8 @@ object Strings {
     const val CHARACTER_DETAIL_ORIGIN= "Origin"
     const val CHARACTER_DETAIL_GENDER = "Gender"
     const val CD_TOPAPPBAR = "Rick & Morty Definitive App"
+    const val ERROR_MESSAGE = "Something went wrong. Check your connection and try again."
+    const val RETRY = "Retry"
 
     fun cdEpisodeImage(name: String) = "Episode $name image"
     fun cdCharacterOfTheDay(name: String) = "Character of the day: $name"

@@ -52,8 +52,10 @@ fun CharacterDetailScreen(
                 bodyModifier.padding(horizontal = 16.dp).padding(top = 20.dp)
             )
             CharacterEpisodesList(
-                state.episodeList,
-                bodyModifier.padding(horizontal = 16.dp, vertical = 20.dp).padding(bottom = 20.dp)
+                episodeList = state.episodeList,
+                isError = state.isEpisodesError,
+                onRetry = characterDetailViewModel::onEpisodesRetryClick,
+                modifier = bodyModifier.padding(horizontal = 16.dp, vertical = 20.dp).padding(bottom = 20.dp)
             )
         }
     }

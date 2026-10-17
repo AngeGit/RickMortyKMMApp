@@ -13,6 +13,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.material3.LocalContentColor
+import com.angiedev.rickmortyapp.ui.core.components.ErrorView
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -37,7 +39,11 @@ import com.angiedev.rickmortyapp.ui.extensions.vertical
 
 
 @Composable
-fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
+fun CharacterOfTheDayComponent(
+    characterOfTheDay: CharacterModel?,
+    isError: Boolean,
+    onRetry: () -> Unit,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,9 +51,15 @@ fun CharacterOfTheDayComponent(characterOfTheDay: CharacterModel? = null) {
             .padding(CARD_PADDING),
         shape = RoundedCornerShape(CARD_CORNER_RADIUS),
     ) {
-        characterOfTheDay?.let {
-            CharacterContent(characterOfTheDay)
-        } ?: Loading()
+        when {
+            characterOfTheDay != null -> CharacterContent(characterOfTheDay)
+            isError -> ErrorView(
+                onRetry = onRetry,
+                modifier = Modifier.fillMaxSize(),
+                textColor = LocalContentColor.current,
+            )
+            else -> Loading()
+        }
     }
 }
 
