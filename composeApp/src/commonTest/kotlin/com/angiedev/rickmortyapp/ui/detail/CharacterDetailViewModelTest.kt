@@ -11,6 +11,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class CharacterDetailViewModelTest : MainDispatcherTest() {
 
@@ -50,4 +51,25 @@ class CharacterDetailViewModelTest : MainDispatcherTest() {
 
         assertEquals(listOf(listOf("1", "2")), repository.requestedEpisodeLists)
     }
+
+    //region Errors
+    @Test
+    fun `failing episodes do not crash the screen`() = runTest {
+        repository.getEpisodesError = IllegalStateException("No network")
+
+        createViewModel()
+        advanceUntilIdle()
+    }
+
+    @Test
+    fun `failing episodes show an error`() = runTest {
+        repository.getEpisodesError = IllegalStateException("No network")
+
+        createViewModel().uiState.test {
+            skipItems(1) // initial state
+
+            assertTrue(awaitItem().isEpisodesError)
+        }
+    }
+    //endregion Errors
 }

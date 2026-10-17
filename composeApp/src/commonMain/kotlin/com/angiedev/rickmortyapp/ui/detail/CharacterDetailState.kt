@@ -5,5 +5,6 @@ import com.angiedev.rickmortyapp.domain.model.EpisodeModel
 
 data class CharacterDetailState(
     val characterModel: CharacterModel,
-    val episodeList: List<EpisodeModel>? = null
+    val episodeList: List<EpisodeModel>? = null,
+    val isEpisodesError: Boolean = false,
 )
