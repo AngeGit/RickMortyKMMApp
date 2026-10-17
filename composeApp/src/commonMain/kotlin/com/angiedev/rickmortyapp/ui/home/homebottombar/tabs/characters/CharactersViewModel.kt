@@ -38,4 +38,7 @@ class CharactersViewModel(
             }
         }
     }
+
+    fun onCharacterOfTheDayRetryClick() {
+    }
 }

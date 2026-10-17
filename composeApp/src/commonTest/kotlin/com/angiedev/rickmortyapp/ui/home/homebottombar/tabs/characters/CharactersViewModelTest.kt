@@ -16,6 +16,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -93,6 +94,32 @@ class CharactersViewModelTest : MainDispatcherTest() {
         repository.getCharacterError = CancellationException("Cancelled")
 
         val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        assertFalse(viewModel.characterOfTheDayState.value.isCharacterOfTheDayError)
+    }
+
+    @Test
+    fun `retrying after a failure loads the character of the day`() = runTest {
+        repository.getCharacterError = IllegalStateException("No network")
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        repository.getCharacterError = null
+        viewModel.onCharacterOfTheDayRetryClick()
+        advanceUntilIdle()
+
+        assertNotNull(viewModel.characterOfTheDayState.value.characterOfTheDay)
+    }
+
+    @Test
+    fun `a successful retry clears the error`() = runTest {
+        repository.getCharacterError = IllegalStateException("No network")
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        repository.getCharacterError = null
+        viewModel.onCharacterOfTheDayRetryClick()
         advanceUntilIdle()
 
         assertFalse(viewModel.characterOfTheDayState.value.isCharacterOfTheDayError)
