@@ -72,6 +72,8 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.turbine)
+            implementation(libs.paging.testing)
         }
     }
 }
@@ -100,6 +102,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    testOptions {
+        // Paging logs through android.util.Log, which only has stubs in local unit tests
+        unitTests.isReturnDefaultValues = true
     }
 }
 

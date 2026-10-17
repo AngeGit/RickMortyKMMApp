@@ -30,7 +30,7 @@ fun CharactersScreen(
 ) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state = charactersViewModel.characterOfTheDayState.collectAsStateWithLifecycle()
-    val characters = state.value.characters.collectAsLazyPagingItems()
+    val characters = charactersViewModel.characters.collectAsLazyPagingItems()
 
     Box(
         modifier = Modifier
