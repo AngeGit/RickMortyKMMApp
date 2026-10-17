@@ -3,7 +3,7 @@ package com.angiedev.rickmortyapp.data
 import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
-import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
+import com.angiedev.rickmortyapp.data.local.dao.UserPreferencesDAO
 import com.angiedev.rickmortyapp.data.local.entities.toEntity
 import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
@@ -16,9 +16,7 @@ import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
     private val api: ApiService,
-    private val charactersPagingSource: CharactersPagingSource,
-    private val episodesPagingSources: EpisodesPagingSource,
-    private val db: RickMortyDatabase,
+    private val userPreferencesDao: UserPreferencesDAO,
 ) : Repository {
 
     companion object {
@@ -35,17 +33,18 @@ class RepositoryImpl(
                 prefetchDistance = PREFETCH_ITEMS,
             )
         ) {
-            charactersPagingSource
+            // Paging needs a new PagingSource every time the data is invalidated
+            CharactersPagingSource(api)
         }.flow
 
     override suspend fun getCharacter(id: Int): CharacterModel =
         api.getCharacterById(id).toDomain()
 
     override suspend fun getCharacterOfTheDayDB(): CharacterOfTheDayModel? =
-        db.userPreferencesDao().getCharacterOfTheDayDB()?.toDomain()
+        userPreferencesDao.getCharacterOfTheDayDB()?.toDomain()
 
     override suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel) {
-        db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
+        userPreferencesDao.insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
     //endregion Characters
     //region Episodes
@@ -55,7 +54,7 @@ class RepositoryImpl(
                 pageSize = MAX_CHARACTERS,
                 prefetchDistance = PREFETCH_ITEMS,
             )
-        ) { episodesPagingSources }.flow
+        ) { EpisodesPagingSource(api) }.flow
 
     override suspend fun getEpisodes(episodeList: List<String>): List<EpisodeModel> =
         when (episodeList.size) {

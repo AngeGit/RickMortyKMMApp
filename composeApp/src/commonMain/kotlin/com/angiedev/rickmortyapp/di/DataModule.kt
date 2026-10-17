@@ -1,9 +1,8 @@
 package com.angiedev.rickmortyapp.di
 
 import com.angiedev.rickmortyapp.data.RepositoryImpl
+import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
 import com.angiedev.rickmortyapp.data.remote.ApiService
-import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
-import com.angiedev.rickmortyapp.data.remote.paging.EpisodesPagingSource
 import com.angiedev.rickmortyapp.domain.Repository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -36,8 +35,7 @@ val dataModule = module {
     }
 
     factoryOf(::ApiService)
-    factory<Repository> { RepositoryImpl(get(), get(), get(), get()) }
-    factoryOf(::CharactersPagingSource)
-    factoryOf(::EpisodesPagingSource)
+    single { get<RickMortyDatabase>().userPreferencesDao() }
+    factory<Repository> { RepositoryImpl(get(), get()) }
 
 }
