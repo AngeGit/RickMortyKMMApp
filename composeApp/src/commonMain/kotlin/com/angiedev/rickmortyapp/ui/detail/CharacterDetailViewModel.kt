@@ -22,8 +22,12 @@ class CharacterDetailViewModel(
 
     private fun getEpisodesForCharacter(episodes: List<String>) {
         viewModelScope.launch {
-            val result = getEpisodes(episodes)
-            _uiState.update { it.copy(episodeList = result) }
+            try {
+                val result = getEpisodes(episodes)
+                _uiState.update { it.copy(episodeList = result) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isEpisodesError = true) }
+            }
         }
     }
 }
