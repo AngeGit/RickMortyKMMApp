@@ -31,6 +31,11 @@ class PagingContentTest {
     }
 
     @Test
+    fun `a failed first load shows the error view`() {
+        assertEquals(PagingContent.ERROR, pagingContentOf(failed, itemCount = 0))
+    }
+
+    @Test
     fun `a failed reload with items already on screen keeps showing them`() {
         assertEquals(PagingContent.ITEMS, pagingContentOf(failed, itemCount = 20))
     }
@@ -40,6 +45,11 @@ class PagingContentTest {
     @Test
     fun `loading the next page shows the loading footer`() {
         assertEquals(PagingFooter.LOADING, pagingFooterOf(LoadState.Loading))
+    }
+
+    @Test
+    fun `a failed next page shows the retry footer`() {
+        assertEquals(PagingFooter.ERROR, pagingFooterOf(failed))
     }
 
     @Test

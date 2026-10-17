@@ -33,6 +33,8 @@ fun <T : Any> PagingGridWrapper(
             emptyListView()
         }
 
+        PagingContent.ERROR -> Unit
+
         PagingContent.ITEMS -> {
             when(pagingType){
                 PagingType.ROW -> {
@@ -69,6 +71,7 @@ fun <T : Any> PagingGridWrapper(
 
             when (pagingFooterOf(pagingItems.loadState.append)) {
                 PagingFooter.LOADING -> itemLoadingView()
+                PagingFooter.ERROR -> Unit
                 PagingFooter.NONE -> Unit
             }
         }

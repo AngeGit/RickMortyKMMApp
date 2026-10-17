@@ -7,12 +7,14 @@ internal enum class PagingContent {
     INITIAL_LOADING,
     EMPTY,
     ITEMS,
+    ERROR,
 }
 
 /** What PagingGridWrapper shows after the last item. */
 internal enum class PagingFooter {
     NONE,
     LOADING,
+    ERROR,
 }
 
 internal fun pagingContentOf(refresh: LoadState, itemCount: Int): PagingContent = when {
