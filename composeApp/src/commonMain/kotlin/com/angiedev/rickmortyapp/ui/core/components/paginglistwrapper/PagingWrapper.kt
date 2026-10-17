@@ -1,7 +1,6 @@
 package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper
 
 import androidx.compose.runtime.Composable
-import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import com.angiedev.rickmortyapp.ui.core.components.Loading
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingEmptyView
@@ -25,16 +24,16 @@ fun <T : Any> PagingGridWrapper(
     itemLoadingView: @Composable () -> Unit = { PagingItemLoadingView() },
     ) {
 
-    when {
-        pagingItems.loadState.refresh is LoadState.Loading && pagingItems.itemCount == 0 -> {
+    when (pagingContentOf(pagingItems.loadState.refresh, pagingItems.itemCount)) {
+        PagingContent.INITIAL_LOADING -> {
             initialLoadingView()
         }
 
-        pagingItems.loadState.refresh is LoadState.NotLoading && pagingItems.itemCount == 0 -> {
+        PagingContent.EMPTY -> {
             emptyListView()
         }
 
-        else -> {
+        PagingContent.ITEMS -> {
             when(pagingType){
                 PagingType.ROW -> {
                     PagingRowWrapper(
@@ -68,9 +67,9 @@ fun <T : Any> PagingGridWrapper(
                 }
             }
 
-            //Loading
-            if (pagingItems.loadState.append is LoadState.Loading) {
-                itemLoadingView()
+            when (pagingFooterOf(pagingItems.loadState.append)) {
+                PagingFooter.LOADING -> itemLoadingView()
+                PagingFooter.NONE -> Unit
             }
         }
     }
