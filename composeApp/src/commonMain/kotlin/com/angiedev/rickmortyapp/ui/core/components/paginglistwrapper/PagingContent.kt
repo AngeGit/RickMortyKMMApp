@@ -20,10 +20,12 @@ internal enum class PagingFooter {
 internal fun pagingContentOf(refresh: LoadState, itemCount: Int): PagingContent = when {
     refresh is LoadState.Loading && itemCount == 0 -> PagingContent.INITIAL_LOADING
     refresh is LoadState.NotLoading && itemCount == 0 -> PagingContent.EMPTY
+    refresh is LoadState.Error && itemCount == 0 -> PagingContent.ERROR
     else -> PagingContent.ITEMS
 }
 
 internal fun pagingFooterOf(append: LoadState): PagingFooter = when (append) {
     is LoadState.Loading -> PagingFooter.LOADING
+    is LoadState.Error -> PagingFooter.ERROR
     else -> PagingFooter.NONE
 }
