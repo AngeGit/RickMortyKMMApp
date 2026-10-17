@@ -6,13 +6,10 @@ import androidx.paging.cachedIn
 import com.angiedev.rickmortyapp.domain.GetAllCharactersUseCase
 import com.angiedev.rickmortyapp.domain.GetCharacterOfTheDayUseCase
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CharactersViewModel(
     private val getCharacterOfTheDayUseCase: GetCharacterOfTheDayUseCase,
@@ -24,9 +21,7 @@ class CharactersViewModel(
 
     init {
         viewModelScope.launch {
-            val result: CharacterModel = withContext(Dispatchers.IO){
-                getCharacterOfTheDayUseCase()
-            }
+            val result: CharacterModel = getCharacterOfTheDayUseCase()
             _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
         }
         fetchAllCharacters()
