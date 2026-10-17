@@ -6,6 +6,7 @@ import com.angiedev.rickmortyapp.data.remote.responses.characters.OriginResponse
 
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.domain.model.CharacterOfTheDayModel
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Entity(tableName = "character_of_the_day")
@@ -38,3 +39,15 @@ data class CharacterOfTheDayEntity (
         selectedDate = selectedDate
     )
 }
+
+fun CharacterOfTheDayModel.toEntity() = CharacterOfTheDayEntity(
+    id = character.id,
+    status = character.isAlive,
+    image = character.image,
+    name = character.name,
+    selectedDate = selectedDate,
+    species = character.species,
+    gender = character.gender,
+    origin = character.origin,
+    episodes = Json.encodeToString(character.episodes)
+)

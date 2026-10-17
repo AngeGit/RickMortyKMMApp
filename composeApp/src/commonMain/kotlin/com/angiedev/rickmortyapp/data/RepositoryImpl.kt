@@ -4,6 +4,7 @@ import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
 import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
+import com.angiedev.rickmortyapp.data.local.entities.toEntity
 import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
 import com.angiedev.rickmortyapp.data.remote.paging.EpisodesPagingSource
