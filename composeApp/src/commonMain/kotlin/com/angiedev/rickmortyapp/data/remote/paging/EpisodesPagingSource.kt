@@ -18,7 +18,7 @@ class EpisodesPagingSource(
             val page = params.key ?: 1
             val response: EpisodesWrapperResponse = api.getAllEpisodes(page)
             val episodes = response.results
-            val prev = if (page > 0) -1 else null
+            val prev = if (page > 1) page - 1 else null
             val nextPage = if (response.info.next != null) page + 1 else null
 
             LoadResult.Page(
