@@ -11,6 +11,7 @@ fun <T : Any> PagingHorizontalGridWrapper(
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
     firstItemList: (@Composable () -> Unit)? = null,
+    lastItemList: (@Composable () -> Unit)? = null,
 ) = LazyHorizontalGrid(rows = GridCells.Fixed(2)) {
 
     firstItemList?.let {
@@ -23,6 +24,11 @@ fun <T : Any> PagingHorizontalGridWrapper(
     items(pagingItems.itemCount) { index ->
         pagingItems[index]?.let {
             itemView(it)
+        }
+    }
+    lastItemList?.let {
+        item(span = { GridItemSpan(2)  }) {
+            lastItemList()
         }
     }
 }

@@ -1,0 +1,31 @@
+package com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper
+
+import androidx.paging.LoadState
+
+/** What PagingGridWrapper shows in place of the list. */
+internal enum class PagingContent {
+    INITIAL_LOADING,
+    EMPTY,
+    ITEMS,
+    ERROR,
+}
+
+/** What PagingGridWrapper shows after the last item. */
+internal enum class PagingFooter {
+    NONE,
+    LOADING,
+    ERROR,
+}
+
+internal fun pagingContentOf(refresh: LoadState, itemCount: Int): PagingContent = when {
+    refresh is LoadState.Loading && itemCount == 0 -> PagingContent.INITIAL_LOADING
+    refresh is LoadState.NotLoading && itemCount == 0 -> PagingContent.EMPTY
+    refresh is LoadState.Error && itemCount == 0 -> PagingContent.ERROR
+    else -> PagingContent.ITEMS
+}
+
+internal fun pagingFooterOf(append: LoadState): PagingFooter = when (append) {
+    is LoadState.Loading -> PagingFooter.LOADING
+    is LoadState.Error -> PagingFooter.ERROR
+    else -> PagingFooter.NONE
+}

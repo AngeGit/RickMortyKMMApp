@@ -17,6 +17,12 @@ fun Preview(){
         gender = "",
         origin = "",
         episodes = emptyList()
-    ))
+    ), isError = false, onRetry = {})
 
+}
+
+@Preview
+@Composable
+fun CharacterOfTheDayErrorPreview() {
+    CharacterOfTheDayComponent(characterOfTheDay = null, isError = true, onRetry = {})
 }

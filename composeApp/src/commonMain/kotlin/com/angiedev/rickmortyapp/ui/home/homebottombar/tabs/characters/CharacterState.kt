@@ -4,4 +4,5 @@ import com.angiedev.rickmortyapp.domain.model.CharacterModel
 
 data class CharacterState(
     val characterOfTheDay: CharacterModel? = null,
+    val isCharacterOfTheDayError: Boolean = false,
 )

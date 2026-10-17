@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.angiedev.rickmortyapp.domain.GetEpisodesUseCase
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -20,10 +21,21 @@ class CharacterDetailViewModel(
         getEpisodesForCharacter(characterModel.episodes)
     }
 
+    fun onEpisodesRetryClick() {
+        getEpisodesForCharacter(_uiState.value.characterModel.episodes)
+    }
+
     private fun getEpisodesForCharacter(episodes: List<String>) {
         viewModelScope.launch {
-            val result = getEpisodes(episodes)
-            _uiState.update { it.copy(episodeList = result) }
+            _uiState.update { it.copy(isEpisodesError = false) }
+            try {
+                val result = getEpisodes(episodes)
+                _uiState.update { it.copy(episodeList = result) }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isEpisodesError = true) }
+            }
         }
     }
 }

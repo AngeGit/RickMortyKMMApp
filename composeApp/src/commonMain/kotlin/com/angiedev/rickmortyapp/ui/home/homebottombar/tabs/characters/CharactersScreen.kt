@@ -44,7 +44,13 @@ fun CharactersScreen(
             itemView = { characterModel ->
                 CharacterItemList(characterModel) { onNavigateDetail(characterModel) }
             },
-            firstItemView = { CharacterOfTheDayComponent(state.value.characterOfTheDay) },
+            firstItemView = {
+                CharacterOfTheDayComponent(
+                    characterOfTheDay = state.value.characterOfTheDay,
+                    isError = state.value.isCharacterOfTheDayError,
+                    onRetry = charactersViewModel::onCharacterOfTheDayRetryClick,
+                )
+            },
         )
     }
 }

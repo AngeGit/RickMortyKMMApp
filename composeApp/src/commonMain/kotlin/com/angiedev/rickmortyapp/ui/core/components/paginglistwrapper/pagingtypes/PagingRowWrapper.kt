@@ -11,7 +11,8 @@ fun <T : Any> PagingRowWrapper(
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
     progress: ((Float) -> Unit)? = null,
-    firstItemList: (@Composable () -> Unit)? = null
+    firstItemList: (@Composable () -> Unit)? = null,
+    lastItemList: (@Composable () -> Unit)? = null,
 ) {
     val scrollState = rememberLazyListState()
 
@@ -35,6 +36,11 @@ fun <T : Any> PagingRowWrapper(
         items(pagingItems.itemCount) { pos ->
             pagingItems[pos]?.let { item ->
                 itemView(item)
+            }
+        }
+        lastItemList?.let {
+            item {
+                lastItemList()
             }
         }
     }

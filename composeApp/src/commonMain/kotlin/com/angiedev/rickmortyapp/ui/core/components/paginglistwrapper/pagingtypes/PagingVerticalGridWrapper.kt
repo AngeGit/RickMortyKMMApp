@@ -17,6 +17,7 @@ fun <T : Any> PagingVerticalGridWrapper(
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
     firstItemList: (@Composable () -> Unit)? = null,
+    lastItemList: (@Composable () -> Unit)? = null,
 ) = LazyVerticalGrid(
     columns = GridCells.Fixed(2),
     modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -39,6 +40,11 @@ fun <T : Any> PagingVerticalGridWrapper(
     items(pagingItems.itemCount) { index ->
         pagingItems[index]?.let {
             itemView(it)
+        }
+    }
+    lastItemList?.let {
+        item(span = { GridItemSpan(2)  }) {
+            lastItemList()
         }
     }
 }
