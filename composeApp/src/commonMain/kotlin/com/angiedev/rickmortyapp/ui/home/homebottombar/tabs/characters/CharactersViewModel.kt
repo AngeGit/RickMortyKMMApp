@@ -27,7 +27,16 @@ class CharactersViewModel(
     val characters: Flow<PagingData<CharacterModel>> = getAllCharacters().cachedIn(viewModelScope)
 
     init {
+        loadCharacterOfTheDay()
+    }
+
+    fun onCharacterOfTheDayRetryClick() {
+        loadCharacterOfTheDay()
+    }
+
+    private fun loadCharacterOfTheDay() {
         viewModelScope.launch {
+            _characterOfTheDayState.update { it.copy(isCharacterOfTheDayError = false) }
             try {
                 val result: CharacterModel = getCharacterOfTheDayUseCase()
                 _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
@@ -37,8 +46,5 @@ class CharactersViewModel(
                 _characterOfTheDayState.update { it.copy(isCharacterOfTheDayError = true) }
             }
         }
-    }
-
-    fun onCharacterOfTheDayRetryClick() {
     }
 }
