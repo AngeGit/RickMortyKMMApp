@@ -76,6 +76,9 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 # iOS Motor
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 
+# Test engine that answers requests in memory
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
 #For Serialization
 kotlin-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
