@@ -33,4 +33,7 @@ class CharacterDetailViewModel(
             }
         }
     }
+
+    fun onEpisodesRetryClick() {
+    }
 }

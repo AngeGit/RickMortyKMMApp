@@ -83,5 +83,32 @@ class CharacterDetailViewModelTest : MainDispatcherTest() {
 
         assertFalse(viewModel.uiState.value.isEpisodesError)
     }
+
+    @Test
+    fun `retrying after a failure loads the episodes`() = runTest {
+        repository.getEpisodesError = IllegalStateException("No network")
+        repository.episodes = listOf(anEpisode(id = 1))
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        repository.getEpisodesError = null
+        viewModel.onEpisodesRetryClick()
+        advanceUntilIdle()
+
+        assertEquals(listOf(anEpisode(id = 1)), viewModel.uiState.value.episodeList)
+    }
+
+    @Test
+    fun `a successful episodes retry clears the error`() = runTest {
+        repository.getEpisodesError = IllegalStateException("No network")
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        repository.getEpisodesError = null
+        viewModel.onEpisodesRetryClick()
+        advanceUntilIdle()
+
+        assertFalse(viewModel.uiState.value.isEpisodesError)
+    }
     //endregion Errors
 }
