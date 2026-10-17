@@ -74,6 +74,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.turbine)
             implementation(libs.paging.testing)
+            implementation(libs.ktor.client.mock)
         }
     }
 }

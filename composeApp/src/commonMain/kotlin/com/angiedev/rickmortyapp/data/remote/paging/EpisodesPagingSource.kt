@@ -10,15 +10,20 @@ class EpisodesPagingSource(
     private val api: ApiService
 ) : PagingSource<Int, EpisodeModel>() {
 
-    // Responsible for knowing when we need to load more data
-    override fun getRefreshKey(state: PagingState<Int, EpisodeModel>): Int? = state.anchorPosition
+    // Page to load again when the data is invalidated: the one holding the item the user was looking at
+    override fun getRefreshKey(state: PagingState<Int, EpisodeModel>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.let { page ->
+                page.prevKey?.plus(1) ?: page.nextKey?.minus(1)
+            }
+        }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EpisodeModel> =
         try {
             val page = params.key ?: 1
             val response: EpisodesWrapperResponse = api.getAllEpisodes(page)
             val episodes = response.results
-            val prev = if (page > 0) -1 else null
+            val prev = if (page > 1) page - 1 else null
             val nextPage = if (response.info.next != null) page + 1 else null
 
             LoadResult.Page(
