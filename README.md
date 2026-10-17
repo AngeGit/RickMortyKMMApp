@@ -1,4 +1,4 @@
-# Rick & Morty KMP
+# Rick & Morty · Compose Multiplatform
 
 An Android and iOS app built with Kotlin Multiplatform and a single Compose Multiplatform UI, on top of the public [Rick and Morty API](https://rickandmortyapi.com).
 
