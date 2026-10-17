@@ -27,8 +27,12 @@ class CharactersViewModel(
 
     init {
         viewModelScope.launch {
-            val result: CharacterModel = getCharacterOfTheDayUseCase()
-            _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
+            try {
+                val result: CharacterModel = getCharacterOfTheDayUseCase()
+                _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
+            } catch (e: Exception) {
+                _characterOfTheDayState.update { it.copy(isCharacterOfTheDayError = true) }
+            }
         }
     }
 }
