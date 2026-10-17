@@ -7,6 +7,7 @@ import app.cash.paging.PagingData
 import com.angiedev.rickmortyapp.domain.GetAllCharactersUseCase
 import com.angiedev.rickmortyapp.domain.GetCharacterOfTheDayUseCase
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +31,8 @@ class CharactersViewModel(
             try {
                 val result: CharacterModel = getCharacterOfTheDayUseCase()
                 _characterOfTheDayState.update { it.copy(characterOfTheDay = result) }
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 _characterOfTheDayState.update { it.copy(isCharacterOfTheDayError = true) }
             }
