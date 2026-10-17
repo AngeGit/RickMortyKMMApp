@@ -1,8 +1,6 @@
 package com.angiedev.rickmortyapp.data
 
 import androidx.paging.testing.asSnapshot
-import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
-import com.angiedev.rickmortyapp.data.remote.paging.EpisodesPagingSource
 import com.angiedev.rickmortyapp.fakes.FakeApi
 import com.angiedev.rickmortyapp.fakes.FakeUserPreferencesDao
 import com.angiedev.rickmortyapp.fixtures.ApiJson
@@ -51,8 +49,6 @@ class RepositoryImplTest {
 
     private fun repositoryWith(api: FakeApi) = RepositoryImpl(
         api = api.service,
-        charactersPagingSource = CharactersPagingSource(api.service),
-        episodesPagingSources = EpisodesPagingSource(api.service),
         userPreferencesDao = FakeUserPreferencesDao(),
     )
 }

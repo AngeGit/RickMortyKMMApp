@@ -16,8 +16,6 @@ import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
     private val api: ApiService,
-    private val charactersPagingSource: CharactersPagingSource,
-    private val episodesPagingSources: EpisodesPagingSource,
     private val userPreferencesDao: UserPreferencesDAO,
 ) : Repository {
 
@@ -35,7 +33,8 @@ class RepositoryImpl(
                 prefetchDistance = PREFETCH_ITEMS,
             )
         ) {
-            charactersPagingSource
+            // Paging needs a new PagingSource every time the data is invalidated
+            CharactersPagingSource(api)
         }.flow
 
     override suspend fun getCharacter(id: Int): CharacterModel =
@@ -55,7 +54,7 @@ class RepositoryImpl(
                 pageSize = MAX_CHARACTERS,
                 prefetchDistance = PREFETCH_ITEMS,
             )
-        ) { episodesPagingSources }.flow
+        ) { EpisodesPagingSource(api) }.flow
 
     override suspend fun getEpisodes(episodeList: List<String>): List<EpisodeModel> =
         when (episodeList.size) {
