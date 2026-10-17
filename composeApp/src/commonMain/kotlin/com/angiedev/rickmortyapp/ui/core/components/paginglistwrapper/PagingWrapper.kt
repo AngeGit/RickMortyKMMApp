@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import app.cash.paging.compose.LazyPagingItems
 import com.angiedev.rickmortyapp.ui.core.components.Loading
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingEmptyView
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingErrorView
+import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingItemErrorView
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingdefaultviews.PagingItemLoadingView
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingColumnWrapper
 import com.angiedev.rickmortyapp.ui.core.components.paginglistwrapper.pagingtypes.PagingHorizontalGridWrapper
@@ -22,6 +24,8 @@ fun <T : Any> PagingGridWrapper(
     emptyListView: @Composable () -> Unit = { PagingEmptyView() },
     firstItemView: (@Composable () -> Unit)? = null,
     itemLoadingView: @Composable () -> Unit = { PagingItemLoadingView() },
+    errorView: @Composable (onRetry: () -> Unit) -> Unit = { onRetry -> PagingErrorView(onRetry) },
+    itemErrorView: @Composable (onRetry: () -> Unit) -> Unit = { onRetry -> PagingItemErrorView(onRetry) },
     ) {
 
     when (pagingContentOf(pagingItems.loadState.refresh, pagingItems.itemCount)) {
@@ -33,14 +37,24 @@ fun <T : Any> PagingGridWrapper(
             emptyListView()
         }
 
-        PagingContent.ERROR -> Unit
+        PagingContent.ERROR -> {
+            errorView(pagingItems::retry)
+        }
 
         PagingContent.ITEMS -> {
+            // The footer goes inside the list as its last item, so it scrolls with the items
+            val footer: (@Composable () -> Unit)? = when (pagingFooterOf(pagingItems.loadState.append)) {
+                PagingFooter.LOADING -> itemLoadingView
+                PagingFooter.ERROR -> { { itemErrorView(pagingItems::retry) } }
+                PagingFooter.NONE -> null
+            }
+
             when(pagingType){
                 PagingType.ROW -> {
                     PagingRowWrapper(
                         pagingItems = pagingItems,
                         firstItemList = firstItemView,
+                        lastItemList = footer,
                         itemView = itemView,
                         progress = progress
                     )
@@ -49,6 +63,7 @@ fun <T : Any> PagingGridWrapper(
                     PagingColumnWrapper(
                         pagingItems = pagingItems,
                         firstItemList = firstItemView,
+                        lastItemList = footer,
                         itemView = itemView
                     )
                 }
@@ -57,6 +72,7 @@ fun <T : Any> PagingGridWrapper(
                         pagingListTitle = pagingListTitle,
                         pagingItems = pagingItems,
                         firstItemList = firstItemView,
+                        lastItemList = footer,
                         itemView = itemView
                     )
                 }
@@ -64,15 +80,10 @@ fun <T : Any> PagingGridWrapper(
                     PagingHorizontalGridWrapper(
                         pagingItems = pagingItems,
                         firstItemList = firstItemView,
+                        lastItemList = footer,
                         itemView = itemView
                     )
                 }
-            }
-
-            when (pagingFooterOf(pagingItems.loadState.append)) {
-                PagingFooter.LOADING -> itemLoadingView()
-                PagingFooter.ERROR -> Unit
-                PagingFooter.NONE -> Unit
             }
         }
     }

@@ -9,6 +9,7 @@ fun <T : Any> PagingColumnWrapper(
     pagingItems: LazyPagingItems<T>,
     itemView: @Composable (T) -> Unit,
     firstItemList: (@Composable () -> Unit)? = null,
+    lastItemList: (@Composable () -> Unit)? = null,
 ) = LazyColumn {
 
     firstItemList?.let {
@@ -21,6 +22,11 @@ fun <T : Any> PagingColumnWrapper(
     items(pagingItems.itemCount) { index ->
         pagingItems[index]?.let {
             itemView(it)
+        }
+    }
+    lastItemList?.let {
+        item {
+            lastItemList()
         }
     }
 }
