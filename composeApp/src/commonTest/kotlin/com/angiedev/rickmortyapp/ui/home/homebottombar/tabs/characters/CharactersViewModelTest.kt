@@ -23,7 +23,7 @@ class CharactersViewModelTest : MainDispatcherTest() {
     // - After init, the state holds the character of the day the repository returns.
     // - If a character was saved today (repository.savedCharacterOfTheDay), it is shown and
     //   repository.requestedCharacterIds stays empty.
-    // - `characters` exposes the repository's paged list: set
-    //   repository.pagedCharacters = listOf(aCharacter(id = 1), aCharacter(id = 2)) before creating
-    //   the ViewModel; state.characters.asSnapshot() (androidx.paging.testing) returns those items.
+    // - `characters` (a ViewModel property, not part of the state) exposes the repository's paged list:
+    //   set repository.pagedCharacters = listOf(aCharacter(id = 1), aCharacter(id = 2)) before creating
+    //   the ViewModel; viewModel.characters.asSnapshot() (androidx.paging.testing) returns those items.
 }

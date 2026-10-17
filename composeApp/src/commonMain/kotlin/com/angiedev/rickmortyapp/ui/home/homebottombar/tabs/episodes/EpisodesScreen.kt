@@ -24,7 +24,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun EpisodesScreen() {
     val episodesViewModel = koinViewModel<EpisodesViewModel>()
     val episodesState = episodesViewModel.state.collectAsStateWithLifecycle()
-    val episodes = episodesState.value.episodes.collectAsLazyPagingItems()
+    val episodes = episodesViewModel.episodes.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier

@@ -16,6 +16,6 @@ class EpisodesViewModelTest : MainDispatcherTest() {
     // - The first state has no video selected (playerVideoUrl is empty).
     // - onEpisodeSelected(anEpisode(videoUrl = "...")) sets playerVideoUrl to that video.
     // - onVideoPlayerClose() clears playerVideoUrl again.
-    // - `episodes` exposes the repository's paged list (repository.pagedEpisodes, set before creating
-    //   the ViewModel, + asSnapshot()).
+    // - `episodes` (a ViewModel property, not part of the state) exposes the repository's paged list
+    //   (repository.pagedEpisodes, set before creating the ViewModel, + viewModel.episodes.asSnapshot()).
 }
