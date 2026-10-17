@@ -6,10 +6,12 @@ import com.angiedev.rickmortyapp.fakes.FakeRepository
 import com.angiedev.rickmortyapp.fixtures.aCharacter
 import com.angiedev.rickmortyapp.fixtures.anEpisode
 import com.angiedev.rickmortyapp.testing.MainDispatcherTest
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -70,6 +72,16 @@ class CharacterDetailViewModelTest : MainDispatcherTest() {
 
             assertTrue(awaitItem().isEpisodesError)
         }
+    }
+
+    @Test
+    fun `a cancelled episodes load is not reported as an error`() = runTest {
+        repository.getEpisodesError = CancellationException("Cancelled")
+
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        assertFalse(viewModel.uiState.value.isEpisodesError)
     }
     //endregion Errors
 }
