@@ -3,7 +3,7 @@ package com.angiedev.rickmortyapp.data
 import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
-import com.angiedev.rickmortyapp.data.local.RickMortyDatabase
+import com.angiedev.rickmortyapp.data.local.dao.UserPreferencesDAO
 import com.angiedev.rickmortyapp.data.local.entities.toEntity
 import com.angiedev.rickmortyapp.data.remote.ApiService
 import com.angiedev.rickmortyapp.data.remote.paging.CharactersPagingSource
@@ -18,7 +18,7 @@ class RepositoryImpl(
     private val api: ApiService,
     private val charactersPagingSource: CharactersPagingSource,
     private val episodesPagingSources: EpisodesPagingSource,
-    private val db: RickMortyDatabase,
+    private val userPreferencesDao: UserPreferencesDAO,
 ) : Repository {
 
     companion object {
@@ -42,10 +42,10 @@ class RepositoryImpl(
         api.getCharacterById(id).toDomain()
 
     override suspend fun getCharacterOfTheDayDB(): CharacterOfTheDayModel? =
-        db.userPreferencesDao().getCharacterOfTheDayDB()?.toDomain()
+        userPreferencesDao.getCharacterOfTheDayDB()?.toDomain()
 
     override suspend fun saveCharacterOfTheDay(characterOfTheDay: CharacterOfTheDayModel) {
-        db.userPreferencesDao().insertCharacterOfTheDay(characterOfTheDay.toEntity())
+        userPreferencesDao.insertCharacterOfTheDay(characterOfTheDay.toEntity())
     }
     //endregion Characters
     //region Episodes
