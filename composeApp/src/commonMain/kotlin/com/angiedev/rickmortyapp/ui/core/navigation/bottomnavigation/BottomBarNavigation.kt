@@ -1,7 +1,10 @@
 package com.angiedev.rickmortyapp.ui.core.navigation.bottomnavigation
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -27,8 +30,12 @@ fun BottomBarNavigation(items: List<BottomBarItem>, navController: NavHostContro
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
+    // NavigationBar pads its items by the system navigation bar (drawn behind it since targetSdk 35),
+    // so the bar grows by that inset to keep 72dp for the items
+    val navigationBarInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+
     NavigationBar(
-        modifier = Modifier.fillMaxWidth().height(72.dp),
+        modifier = Modifier.fillMaxWidth().height(72.dp + navigationBarInset),
         containerColor = BackgroundSecondaryColor,
         contentColor = BrightGreen
     ) {
