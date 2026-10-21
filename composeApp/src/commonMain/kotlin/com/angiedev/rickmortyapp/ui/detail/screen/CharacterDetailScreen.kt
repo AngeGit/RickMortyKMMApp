@@ -2,9 +2,14 @@ package com.angiedev.rickmortyapp.ui.detail.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.angiedev.rickmortyapp.domain.model.CharacterModel
 import com.angiedev.rickmortyapp.domain.model.EpisodeModel
+import com.angiedev.rickmortyapp.ui.core.resources.BackgroundPrimaryColor
 import com.angiedev.rickmortyapp.ui.core.resources.BackgroundSecondaryColor
 import com.angiedev.rickmortyapp.ui.core.resources.primaryWhite
 import com.angiedev.rickmortyapp.ui.detail.CharacterDetailViewModel
@@ -39,8 +45,15 @@ fun CharacterDetailScreen(
     val bodyModifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp).fillMaxWidth()
 
     Column(
-        modifier = mainModifier
+        modifier = mainModifier.navigationBarsPadding()
     ) {
+        // The screen is drawn behind the status bar; this band keeps the header below it, in the theme
+        // background so the system picks readable status bar icons in light and dark mode
+        Spacer(
+            Modifier.fillMaxWidth()
+                .windowInsetsTopHeight(WindowInsets.statusBars)
+                .background(BackgroundPrimaryColor)
+        )
         MainHeader(state.characterModel)
         Column(
             modifier = mainModifier
